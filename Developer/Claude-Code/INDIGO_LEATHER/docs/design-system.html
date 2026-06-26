@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Indigo Leather — Design System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Barlow+Condensed:wght@300;400;500;600&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      /* ── Backgrounds ── */
+      --bg:        #F7F2EA;
+      --bg-warm:   #EDE5D8;
+      --bg-cream:  #FAF8F4;
+      --bg-dark:   #1E1208;
+
+      /* ── Leather palette ── */
+      --chocolate: #3D2010;
+      --tan:       #B8824A;
+      --saddle:    #8B5A2B;
+      --camel:     #C4975A;
+      --brass:     #B8922A;
+
+      /* ── Brand accents ── */
+      --indigo:    #2B3A5C;
+      --hunter:    #2D4A35;
+
+      /* ── Ink scale ── */
+      --ink:       #1E1208;
+      --ink-warm:  #3D2A1A;
+      --ink-mid:   #6B4E34;
+      --ink-muted: #9E8878;
+      --ink-light: #C4B09A;
+      --ink-inv:   #F7F2EA;
+
+      /* ── Rules ── */
+      --rule:      #C9B49A;
+      --rule-lt:   #E2D5C0;
+      --rule-dk:   #8B6A4A;
+
+      /* ── Typography ── */
+      --f-display: 'Playfair Display', Georgia, serif;
+      --f-label:   'Barlow Condensed', 'Arial Narrow', sans-serif;
+      --f-stamp:   'Courier Prime', 'Courier New', monospace;
+
+      /* ── Motion ── */
+      --ease-out:     cubic-bezier(0, 0, 0.2, 1);
+      --ease-leather: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--ink); font-family: var(--f-display); -webkit-font-smoothing: antialiased; line-height: 1.6; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Layout ── */
+    .ds-wrap { max-width: 1200px; margin: 0 auto; padding: 0 48px 120px; }
+    .ds-section { padding: 72px 0 0; border-top: 1px solid var(--rule-lt); margin-top: 64px; }
+    .ds-section:first-of-type { border-top: none; margin-top: 0; }
+
+    /* ── Section headers ── */
+    .ds-eyebrow { font-family: var(--f-label); font-size: 10px; letter-spacing: 0.32em; text-transform: uppercase; color: var(--tan); display: block; margin-bottom: 10px; }
+    .ds-heading { font-family: var(--f-display); font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 500; color: var(--ink); margin-bottom: 8px; }
+    .ds-sub { font-family: var(--f-display); font-size: 1rem; font-style: italic; color: var(--ink-mid); line-height: 1.75; margin-bottom: 40px; max-width: 60ch; }
+
+    /* ── Cover ── */
+    .ds-cover { background: var(--bg-dark); color: var(--ink-inv); padding: 80px 48px; margin-bottom: 0; }
+    .ds-cover__brand { font-family: var(--f-display); font-size: clamp(2.8rem, 6vw, 5rem); font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; line-height: 1; margin-bottom: 16px; }
+    .ds-cover__brand em { font-style: italic; color: var(--tan); }
+    .ds-cover__tagline { font-family: var(--f-label); font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase; color: rgba(247,242,234,0.45); margin-bottom: 32px; }
+    .ds-cover__words { display: flex; gap: 32px; }
+    .ds-cover__word { font-family: var(--f-stamp); font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(247,242,234,0.28); border: 1px solid rgba(247,242,234,0.12); padding: 6px 14px; }
+
+    /* ── Color grid ── */
+    .color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 2px; }
+    .color-chip { height: 100px; display: flex; flex-direction: column; justify-content: flex-end; padding: 12px; position: relative; }
+    .color-chip__name { font-family: var(--f-label); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 500; }
+    .color-chip__hex  { font-family: var(--f-stamp); font-size: 10px; letter-spacing: 0.08em; opacity: 0.7; margin-top: 3px; }
+    .color-chip--light .color-chip__name,
+    .color-chip--light .color-chip__hex { color: var(--ink); }
+    .color-chip--dark .color-chip__name,
+    .color-chip--dark .color-chip__hex  { color: var(--ink-inv); }
+    .color-section-label { font-family: var(--f-label); font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 10px; margin-top: 28px; }
+    .color-section-label:first-child { margin-top: 0; }
+
+    /* ── Type scale ── */
+    .type-row { padding: 28px 0; border-bottom: 1px solid var(--rule-lt); display: flex; align-items: baseline; gap: 32px; }
+    .type-row:first-child { border-top: 1px solid var(--rule-lt); }
+    .type-meta { width: 220px; flex-shrink: 0; }
+    .type-meta__name { font-family: var(--f-label); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--tan); display: block; }
+    .type-meta__spec { font-family: var(--f-stamp); font-size: 10px; letter-spacing: 0.08em; color: var(--ink-muted); margin-top: 4px; line-height: 1.7; }
+    .type-sample { flex: 1; }
+
+    /* ── Spacing scale ── */
+    .space-grid { display: flex; flex-direction: column; gap: 12px; }
+    .space-row { display: flex; align-items: center; gap: 20px; }
+    .space-bar { background: var(--tan); height: 4px; border-radius: 0; flex-shrink: 0; }
+    .space-label { font-family: var(--f-stamp); font-size: 10px; letter-spacing: 0.14em; color: var(--ink-muted); white-space: nowrap; }
+
+    /* ── Components ── */
+    .comp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+    .comp-cell { background: var(--bg-warm); padding: 32px 28px; }
+    .comp-cell--dark { background: var(--bg-dark); }
+    .comp-cell__label { font-family: var(--f-label); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 20px; display: block; }
+    .comp-cell--dark .comp-cell__label { color: rgba(247,242,234,0.3); }
+    .comp-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+
+    /* Buttons */
+    .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 11px 28px; font-family: var(--f-label); font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; cursor: pointer; transition: all 0.22s; white-space: nowrap; border: none; }
+    .btn--primary   { background: var(--ink); color: var(--ink-inv); border: 1px solid var(--ink); }
+    .btn--ghost     { background: transparent; color: var(--ink); border: 1px solid var(--rule); }
+    .btn--ghost-inv { background: transparent; color: var(--ink-inv); border: 1px solid rgba(247,242,234,0.35); }
+    .btn--tan       { background: var(--tan); color: #fff; border: 1px solid var(--tan); }
+    .btn--hunter    { background: var(--hunter); color: var(--ink-inv); border: 1px solid var(--hunter); }
+
+    /* Badges */
+    .badge { display: inline-block; font-family: var(--f-label); font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; padding: 5px 10px; }
+    .badge--cto  { background: var(--ink); color: var(--ink-inv); }
+    .badge--rts  { background: var(--hunter); color: var(--ink-inv); }
+    .badge--new  { background: var(--tan); color: #fff; }
+
+    /* Inputs */
+    .inp { width: 100%; padding: 13px 16px; font-family: var(--f-display); font-size: 1rem; font-style: italic; background: var(--bg); border: 1px solid var(--rule); color: var(--ink); outline: none; }
+    .inp::placeholder { color: var(--ink-light); }
+    .inp-inline { display: flex; }
+    .inp-inline input { flex: 1; padding: 13px 18px; font-family: var(--f-label); font-size: 11px; letter-spacing: 0.14em; background: var(--bg); border: 1px solid var(--rule); border-right: none; color: var(--ink); outline: none; }
+    .inp-inline input::placeholder { color: var(--ink-light); }
+    .inp-inline .btn { flex-shrink: 0; }
+
+    /* Swatches */
+    .swatch-demo { display: flex; gap: 10px; }
+    .swatch-d { width: 36px; height: 36px; border: 2px solid transparent; cursor: pointer; }
+    .swatch-d.sel { border-color: var(--ink); outline: 1px solid var(--ink); outline-offset: 3px; }
+
+    /* Option btns */
+    .btn-opt { font-family: var(--f-label); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; padding: 9px 16px; border: 1px solid var(--rule); color: var(--ink-mid); background: transparent; cursor: pointer; min-height: 40px; }
+    .btn-opt.sel { background: var(--ink); color: var(--ink-inv); border-color: var(--ink); }
+
+    /* Lead time box */
+    .lead-box { border: 1px solid var(--rule); padding: 13px 17px; background: var(--bg-cream); }
+    .lead-box p { font-family: var(--f-label); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-mid); line-height: 1.55; }
+    .lead-box strong { color: var(--ink); font-weight: 600; }
+
+    /* Availability dot */
+    .avail { display: flex; align-items: center; gap: 7px; font-family: var(--f-label); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--hunter); }
+    .avail-dot { width: 6px; height: 6px; background: var(--hunter); border-radius: 50%; animation: pulse 1.8s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:1}50%{opacity:0.2} }
+
+    /* Event card */
+    .event-card { background: var(--bg-cream); border: 1px solid var(--rule-lt); padding: 28px 24px; }
+    .event-card__tag { font-family: var(--f-stamp); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--tan); border: 1px solid rgba(184,130,74,0.35); padding: 4px 10px; display: inline-block; margin-bottom: 14px; }
+    .event-card__name { font-family: var(--f-display); font-size: 1.3rem; font-weight: 500; color: var(--ink); margin-bottom: 6px; }
+    .event-card__loc  { font-family: var(--f-label); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-muted); }
+
+    /* Product card */
+    .prod-card { display: block; }
+    .prod-card__img { aspect-ratio: 3/4; background: var(--bg-warm); margin-bottom: 14px; display: flex; align-items: center; justify-content: center; }
+    .prod-card__img-inner { width: 60%; height: 60%; background: var(--rule-lt); }
+    .prod-card__name { font-family: var(--f-display); font-size: 1.1rem; font-weight: 500; margin-bottom: 4px; }
+    .prod-card__meta { font-family: var(--f-label); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-muted); }
+
+    /* ── Footer sample ── */
+    .footer-sample { background: var(--bg-dark); color: var(--ink-inv); padding: 40px 28px 28px; }
+    .footer-logo { font-family: var(--f-display); font-size: 1.2rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 12px; }
+    .footer-logo em { font-style: italic; color: var(--tan); }
+    .footer-tagline { font-family: var(--f-display); font-size: 0.85rem; font-style: italic; color: rgba(247,242,234,0.38); line-height: 1.85; max-width: 28ch; }
+
+    /* ── Pattern strip ── */
+    .pattern-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; margin-bottom: 2px; }
+    .pattern-cell { height: 56px; }
+
+    /* ── Brand voice ── */
+    .voice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .voice-card { padding: 28px; border: 1px solid var(--rule-lt); }
+    .voice-card__label { font-family: var(--f-label); font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--tan); margin-bottom: 12px; display: block; }
+    .voice-card ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .voice-card li { font-family: var(--f-display); font-size: 0.95rem; font-weight: 500; color: var(--ink-mid); padding-left: 14px; position: relative; }
+    .voice-card li::before { content: '—'; position: absolute; left: 0; color: var(--rule); }
+    .voice-card li.bad { color: var(--ink-light); text-decoration: line-through; }
+
+    /* ── Responsive ── */
+    @media (max-width: 700px) {
+      .ds-wrap { padding: 0 24px 80px; }
+      .comp-grid, .voice-grid { grid-template-columns: 1fr; }
+      .ds-cover { padding: 56px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════
+     COVER
+══════════════════════════════════ -->
+<div class="ds-cover">
+  <div class="ds-wrap" style="padding-top:0;padding-bottom:0;">
+    <p class="ds-cover__tagline">Design System · Version 1.0 · 2026</p>
+    <h1 class="ds-cover__brand">Indigo <em>Leather</em></h1>
+    <p style="font-family:var(--f-display);font-size:1rem;font-style:italic;color:rgba(247,242,234,0.55);margin-bottom:40px;max-width:52ch;line-height:1.8;">Designer-minded handbags made by a craftsperson. Premium-accessible pricing, European silhouettes, made entirely by one maker in the USA.</p>
+    <div class="ds-cover__words">
+      <span class="ds-cover__word">Designed</span>
+      <span class="ds-cover__word">Refined</span>
+      <span class="ds-cover__word">Beautiful</span>
+    </div>
+  </div>
+</div>
+
+<div class="ds-wrap">
+
+<!-- ══════════════════════════════════
+     BRAND DNA
+══════════════════════════════════ -->
+<div class="ds-section">
+  <span class="ds-eyebrow">01 — Brand</span>
+  <h2 class="ds-heading">Brand DNA</h2>
+  <p class="ds-sub">Indigo Leather sits in the gap between artisan leathercraft (rustic, western) and fashion handbags (beautiful silhouettes, no maker). Michael has fashion sensibility <em>and</em> makes the bags herself. That combination is rare.</p>
+
+  <div class="voice-grid">
+    <div class="voice-card">
+      <span class="voice-card__label">Voice — Use</span>
+      <ul>
+        <li>Crafted to Order</li>
+        <li>Made in small batches</li>
+        <li>From the collection</li>
+        <li>Limited ready-to-ship pieces</li>
+        <li>Designer-minded</li>
+        <li>115 steps. Every bag.</li>
+      </ul>
+    </div>
+    <div class="voice-card">
+      <span class="voice-card__label">Voice — Avoid</span>
+      <ul>
+        <li class="bad">Fully custom</li>
+        <li class="bad">Design your own bag</li>
+        <li class="bad">Request a quote</li>
+        <li class="bad">Handmade quality</li>
+        <li class="bad">Amazing craftsmanship</li>
+        <li class="bad">Artisan (if implies rustic)</li>
+      </ul>
+    </div>
+    <div class="voice-card">
+      <span class="voice-card__label">Inspiration References</span>
+      <ul>
+        <li>1990s Coach — everyday luxury</li>
+        <li>Polène — sculptural, small-batch</li>
+        <li>A.P.C. — restraint, simplicity</li>
+        <li>Lancel — European leather heritage</li>
+        <li>Ralph Lauren — the customer's world</li>
+      </ul>
+    </div>
+    <div class="voice-card">
+      <span class="voice-card__label">The Indigo Woman</span>
+      <ul>
+        <li>40–65, professionally established</li>
+        <li>Buys intentionally, dresses timeless</li>
+        <li>Shops Ralph Lauren, Madewell, Eileen Fisher</li>
+        <li>Boutique discoverer, quiet confidence</li>
+        <li>Wants beautiful + functional + distinctive</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     COLOR
+══════════════════════════════════ -->
+<div class="ds-section">
+  <span class="ds-eyebrow">02 — Color</span>
+  <h2 class="ds-heading">Color Tokens</h2>
+  <p class="ds-sub">A warm, restrained palette anchored in parchment and leather. One blue accent (indigo) and one green accent (hunter) provide contrast without breaking the warmth.</p>
+
+  <p class="color-section-label">Backgrounds</p>
+  <div class="color-grid">
+    <div class="color-chip color-chip--light" style="background:#F7F2EA;">
+      <span class="color-chip__name">--bg</span>
+      <span class="color-chip__hex">#F7F2EA</span>
+    </div>
+    <div class="color-chip color-chip--light" style="background:#EDE5D8;">
+      <span class="color-chip__name">--bg-warm</span>
+      <span class="color-chip__hex">#EDE5D8</span>
+    </div>
+    <div class="color-chip color-chip--light" style="background:#FAF8F4;">
+      <span class="color-chip__name">--bg-cream</span>
+      <span class="color-chip__hex">#FAF8F4</span>
+    </div>
+    <div class="color-chip color-chip--dark" style="background:#1E1208;">
+      <span class="color-chip__name">--bg-dark</span>
+      <span class="color-chip__hex">#1E1208</span>
+    </div>
+  </div>
+
+  <p class="color-section-label">Leather Palette</p>
+  <div class="color-grid">
+    <div class="color-chip color-chip--dark" style="background:#3D2010;">
+      <span class="color-chip__name">--chocolate</span>
+      <span class="color-chip__hex">#3D2010</span>
+    </div>
+    <div class="color-chip color-chip--dark" style="background:#B8824A;">
+      <span class="color-chip__name">--tan</span>
+      <span class="color-chip__hex">#B8824A · Primary accent</span>
+    </div>
+    <div class="color-chip color-chip--dark" style="background:#8B5A2B;">
+      <span class="color-chip__name">--saddle</span>
+      <span class="color-chip__hex">#8B5A2B</span>
+    </div>
+    <div class="color-chip color-chip--light" style="background:#C4975A;">
+      <span class="color-chip__name">--camel</span>
+      <span class="color-chip__hex">#C4975A</span>
+    </div>
+    <div class="color-chip color-chip--dark" style="background:#B8922A;">
+      <span class="color-chip__name">--brass</span>
+      <span class="color-chip__hex">#B8922A</span>
+    </div>
+  </div>
+
+  <p class="color-section-label">Brand Accents</p>
+  <div class="color-grid">
+    <div class="color-chip color-chip--dark" style="background:#2B3A5C;">
+      <span class="color-chip__name">--indigo</span>
+      <span class="color-chip__hex">#2B3A5C · Philosophy sections</span>
+    </div>
+    <div class="color-chip color-chip--dark" style="background:#2D4A35;">
+      <span class="color-chip__name">--hunter</span>
+      <span class="color-chip__hex">#2D4A35 · Ready to Ship</span>
+    </div>
+  </div>
+
+  <p class="color-section-label">Ink Scale</p>
+  <div class="color-grid">
+    <div class="color-chip color-chip--dark" style="background:#1E1208;">
+      <span class="color-chip__name">--ink</span>
+      <span class="color-chip__hex">#1E1208</span>
+    </div>
+    <div class="color-chip color-chip--dark" style="background:#3D2A1A;">
+      <span class="color-chip__name">--ink-warm</span>
+      <span class="color-chip__hex">#3D2A1A</span>
+    </div>
+    <div class="color-chip color-chip--dark" style="background:#6B4E34;">
+      <span class="color-chip__name">--ink-mid</span>
+      <span class="color-chip__hex">#6B4E34</span>
+    </div>
+    <div class="color-chip color-chip--light" style="background:#9E8878;">
+      <span class="color-chip__name">--ink-muted</span>
+      <span class="color-chip__hex">#9E8878</span>
+    </div>
+    <div class="color-chip color-chip--light" style="background:#C4B09A;">
+      <span class="color-chip__name">--ink-light</span>
+      <span class="color-chip__hex">#C4B09A</span>
+    </div>
+    <div class="color-chip color-chip--light" style="background:#F7F2EA;border:1px solid #E2D5C0;">
+      <span class="color-chip__name">--ink-inv</span>
+      <span class="color-chip__hex">#F7F2EA</span>
+    </div>
+  </div>
+
+  <p class="color-section-label">Rules / Dividers</p>
+  <div class="color-grid">
+    <div class="color-chip color-chip--light" style="background:#C9B49A;">
+      <span class="color-chip__name">--rule</span>
+      <span class="color-chip__hex">#C9B49A</span>
+    </div>
+    <div class="color-chip color-chip--light" style="background:#E2D5C0;">
+      <span class="color-chip__name">--rule-lt</span>
+      <span class="color-chip__hex">#E2D5C0</span>
+    </div>
+    <div class="color-chip color-chip--dark" style="background:#8B6A4A;">
+      <span class="color-chip__name">--rule-dk</span>
+      <span class="color-chip__hex">#8B6A4A</span>
+    </div>
+  </div>
+
+  <p style="margin-top:32px;" class="color-section-label">Product leather colors</p>
+  <div class="color-grid">
+    <div class="color-chip color-chip--dark" style="background:#1E1208;">
+      <span class="color-chip__name">Black</span>
+      <span class="color-chip__hex">Core colorway</span>
+    </div>
+    <div class="color-chip color-chip--dark" style="background:#3D2010;">
+      <span class="color-chip__name">Espresso</span>
+      <span class="color-chip__hex">Core colorway</span>
+    </div>
+    <div class="color-chip color-chip--dark" style="background:#B8824A;">
+      <span class="color-chip__name">Saddle</span>
+      <span class="color-chip__hex">Core colorway</span>
+    </div>
+    <div class="color-chip color-chip--dark" style="background:#2D4A50;">
+      <span class="color-chip__name">Harbor</span>
+      <span class="color-chip__hex">Dark teal · Core</span>
+    </div>
+    <div class="color-chip color-chip--dark" style="background:#1A3A6B;">
+      <span class="color-chip__name">Cobalt</span>
+      <span class="color-chip__hex">Summer 2026</span>
+    </div>
+    <div class="color-chip color-chip--dark" style="background:#7D2060;">
+      <span class="color-chip__name">Orchid</span>
+      <span class="color-chip__hex">Dark fuchsia · S26</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     TYPOGRAPHY
+══════════════════════════════════ -->
+<div class="ds-section">
+  <span class="ds-eyebrow">03 — Typography</span>
+  <h2 class="ds-heading">Type System</h2>
+  <p class="ds-sub">Three-font system. Playfair Display handles all display and body copy. Barlow Condensed handles all labels, nav, and UI text. Courier Prime provides stamp/receipt accents.</p>
+
+  <div>
+    <div class="type-row">
+      <div class="type-meta">
+        <span class="type-meta__name">Display XL</span>
+        <span class="type-meta__spec">Playfair Display<br/>clamp(3rem,6vw,5.5rem)<br/>wght 500 · lh 1.02</span>
+      </div>
+      <div class="type-sample">
+        <span style="font-family:var(--f-display);font-size:clamp(2.2rem,5vw,4rem);font-weight:500;line-height:1.05;color:var(--ink);">Indigo Leather</span>
+      </div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">
+        <span class="type-meta__name">Display L — italic</span>
+        <span class="type-meta__spec">Playfair Display<br/>clamp(2.4rem,4vw,3.6rem)<br/>wght 500 · italic · lh 1.15</span>
+      </div>
+      <div class="type-sample">
+        <span style="font-family:var(--f-display);font-size:clamp(1.8rem,3.5vw,3rem);font-weight:500;font-style:italic;line-height:1.15;color:var(--ink);">Designed. Refined. Beautiful.</span>
+      </div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">
+        <span class="type-meta__name">Section heading</span>
+        <span class="type-meta__spec">Playfair Display<br/>clamp(1.8rem,3vw,2.6rem)<br/>wght 500 · lh 1.2</span>
+      </div>
+      <div class="type-sample">
+        <span style="font-family:var(--f-display);font-size:clamp(1.5rem,2.5vw,2.2rem);font-weight:500;color:var(--ink);">115 steps. Every bag.</span>
+      </div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">
+        <span class="type-meta__name">Body copy — italic</span>
+        <span class="type-meta__spec">Playfair Display<br/>1rem · wght 500<br/>italic · lh 1.75–1.85</span>
+      </div>
+      <div class="type-sample">
+        <span style="font-family:var(--f-display);font-size:1rem;font-weight:500;font-style:italic;color:var(--ink-mid);line-height:1.8;">There are no less than 115 steps to making each bag. I do them all myself. The decisions embedded in the process are not afterthoughts — they are the design.</span>
+      </div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">
+        <span class="type-meta__name">Nav / Label</span>
+        <span class="type-meta__spec">Barlow Condensed<br/>11–12px · wght 400<br/>letter-spacing 0.16–0.28em<br/>UPPERCASE</span>
+      </div>
+      <div class="type-sample" style="display:flex;gap:28px;flex-wrap:wrap;align-items:center;">
+        <span style="font-family:var(--f-label);font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-mid);">Collection</span>
+        <span style="font-family:var(--f-label);font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-mid);">Ready to Ship</span>
+        <span style="font-family:var(--f-label);font-size:11px;letter-spacing:0.28em;text-transform:uppercase;color:var(--tan);">Crafted to Order</span>
+        <span style="font-family:var(--f-label);font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:var(--ink-muted);">Materials</span>
+      </div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">
+        <span class="type-meta__name">Stamp / Accent</span>
+        <span class="type-meta__spec">Courier Prime<br/>10–12px · wght 400<br/>letter-spacing 0.18–0.22em<br/>UPPERCASE</span>
+      </div>
+      <div class="type-sample" style="display:flex;gap:20px;align-items:center;flex-wrap:wrap;">
+        <span style="font-family:var(--f-stamp);font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink-muted);">Est. 2014</span>
+        <span style="font-family:var(--f-stamp);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--tan);border:1px solid rgba(184,130,74,0.4);padding:4px 12px;">Market</span>
+        <span style="font-family:var(--f-stamp);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink-muted);">Made in USA</span>
+      </div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">
+        <span class="type-meta__name">Stat / Number</span>
+        <span class="type-meta__spec">Playfair Display<br/>clamp(4rem,7vw,6.5rem)<br/>wght 500 · lh 1</span>
+      </div>
+      <div class="type-sample" style="display:flex;gap:56px;align-items:baseline;">
+        <div>
+          <span style="font-family:var(--f-display);font-size:clamp(3rem,6vw,5rem);font-weight:500;line-height:1;color:var(--ink);">115</span>
+          <div style="font-family:var(--f-label);font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:var(--ink-muted);margin-top:6px;">Steps per bag</div>
+        </div>
+        <div>
+          <span style="font-family:var(--f-display);font-size:clamp(3rem,6vw,5rem);font-weight:500;line-height:1;color:var(--ink);">1</span>
+          <div style="font-family:var(--f-label);font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:var(--ink-muted);margin-top:6px;">Maker</div>
+        </div>
+        <div>
+          <span style="font-family:var(--f-display);font-size:clamp(3rem,6vw,5rem);font-weight:500;line-height:1;color:var(--ink);">0</span>
+          <div style="font-family:var(--f-label);font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:var(--ink-muted);margin-top:6px;">Subcontractors</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     COMPONENTS
+══════════════════════════════════ -->
+<div class="ds-section">
+  <span class="ds-eyebrow">04 — Components</span>
+  <h2 class="ds-heading">UI Components</h2>
+  <p class="ds-sub">All components use zero border-radius — sharp corners throughout. One-radius system: 0px. Buttons are minimum 44px tall for touch targets.</p>
+
+  <div class="comp-grid">
+
+    <!-- Buttons -->
+    <div class="comp-cell">
+      <span class="comp-cell__label">Buttons</span>
+      <div class="comp-row" style="margin-bottom:14px;">
+        <button class="btn btn--primary">Add to Bag</button>
+        <button class="btn btn--ghost">View Collection</button>
+        <button class="btn btn--tan">Shop Now</button>
+      </div>
+      <div class="comp-row">
+        <button class="btn btn--hunter">Add to Bag</button>
+      </div>
+    </div>
+    <div class="comp-cell comp-cell--dark">
+      <span class="comp-cell__label">Buttons — dark bg</span>
+      <div class="comp-row">
+        <button class="btn btn--ghost-inv">Browse Collection</button>
+        <button class="btn btn--tan">Ready to Ship</button>
+      </div>
+    </div>
+
+    <!-- Badges -->
+    <div class="comp-cell">
+      <span class="comp-cell__label">Badges</span>
+      <div class="comp-row">
+        <span class="badge badge--cto">Crafted to Order</span>
+        <span class="badge badge--rts">Ready to Ship</span>
+        <span class="badge badge--new">New</span>
+      </div>
+    </div>
+
+    <!-- Lead time -->
+    <div class="comp-cell">
+      <span class="comp-cell__label">Lead Time Box (CTO)</span>
+      <div class="lead-box">
+        <p><strong>Crafted to Order</strong> — This piece is handmade after purchase. Most orders ship within 4–5 weeks.</p>
+      </div>
+    </div>
+
+    <!-- Availability -->
+    <div class="comp-cell">
+      <span class="comp-cell__label">Availability Indicator (RTS)</span>
+      <div class="avail">
+        <span class="avail-dot"></span>
+        Ships in 2–3 business days
+      </div>
+    </div>
+
+    <!-- Color swatches -->
+    <div class="comp-cell">
+      <span class="comp-cell__label">Color Swatches</span>
+      <div class="swatch-demo">
+        <div class="swatch-d sel" style="background:#1E1208;"></div>
+        <div class="swatch-d" style="background:#3D2010;"></div>
+        <div class="swatch-d" style="background:#B8824A;"></div>
+        <div class="swatch-d" style="background:#2D4A50;"></div>
+        <div class="swatch-d" style="background:#1A3A6B;"></div>
+        <div class="swatch-d" style="background:#7D2060;"></div>
+      </div>
+    </div>
+
+    <!-- Option buttons -->
+    <div class="comp-cell">
+      <span class="comp-cell__label">Option Buttons (hardware / strap)</span>
+      <div class="comp-row">
+        <button class="btn-opt sel">Antique Brass</button>
+        <button class="btn-opt">Nickel</button>
+      </div>
+      <div class="comp-row" style="margin-top:12px;">
+        <button class="btn-opt sel">Short Handle</button>
+        <button class="btn-opt">Crossbody</button>
+        <button class="btn-opt">Both +$25</button>
+      </div>
+    </div>
+
+    <!-- Form inputs -->
+    <div class="comp-cell">
+      <span class="comp-cell__label">Form Inputs</span>
+      <input class="inp" placeholder="Your email address" style="margin-bottom:12px;" />
+      <div class="inp-inline">
+        <input type="email" placeholder="Join the Atelier List" />
+        <button class="btn btn--primary" style="min-height:auto;padding:13px 20px;">Subscribe</button>
+      </div>
+    </div>
+
+    <!-- Event card -->
+    <div class="comp-cell">
+      <span class="comp-cell__label">Event Card</span>
+      <div class="event-card">
+        <span class="event-card__tag">Trunk Show</span>
+        <div class="event-card__name">Indigo Trunk Show</div>
+        <div class="event-card__loc">The Linden Shop — Chatham, NY · Aug 7–9, 2026</div>
+      </div>
+    </div>
+
+    <!-- Product card -->
+    <div class="comp-cell">
+      <span class="comp-cell__label">Product Card (Collection)</span>
+      <div class="prod-card">
+        <div class="prod-card__img"><div class="prod-card__img-inner"></div></div>
+        <p class="prod-card__name">The Juniper</p>
+        <p class="prod-card__meta">Crafted to Order — $280</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     LAYOUT PATTERNS
+══════════════════════════════════ -->
+<div class="ds-section">
+  <span class="ds-eyebrow">05 — Layout</span>
+  <h2 class="ds-heading">Layout Patterns</h2>
+  <p class="ds-sub">Max-width 1440px, contained with 48px side padding. Zero-gap grid (2px gap for "seam" effect between cards). Asymmetric hero splits.</p>
+
+  <!-- Background pattern strip -->
+  <p class="color-section-label" style="margin-bottom:12px;">Background rhythm (top → bottom of any page)</p>
+  <div class="pattern-strip">
+    <div class="pattern-cell" style="background:var(--chocolate);display:flex;align-items:center;justify-content:center;">
+      <span style="font-family:var(--f-stamp);font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(247,242,234,0.5);">Ann Bar</span>
+    </div>
+    <div class="pattern-cell" style="background:var(--bg);border:1px solid var(--rule-lt);display:flex;align-items:center;justify-content:center;">
+      <span style="font-family:var(--f-stamp);font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink-muted);">Header</span>
+    </div>
+    <div class="pattern-cell" style="background:var(--bg-dark);display:flex;align-items:center;justify-content:center;">
+      <span style="font-family:var(--f-stamp);font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(247,242,234,0.5);">Hero</span>
+    </div>
+    <div class="pattern-cell" style="background:var(--bg);display:flex;align-items:center;justify-content:center;">
+      <span style="font-family:var(--f-stamp);font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink-muted);">Section 1</span>
+    </div>
+  </div>
+  <div class="pattern-strip">
+    <div class="pattern-cell" style="background:var(--bg-warm);display:flex;align-items:center;justify-content:center;">
+      <span style="font-family:var(--f-stamp);font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink-muted);">Section 2</span>
+    </div>
+    <div class="pattern-cell" style="background:var(--indigo);display:flex;align-items:center;justify-content:center;">
+      <span style="font-family:var(--f-stamp);font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(247,242,234,0.5);">Quote / Pull</span>
+    </div>
+    <div class="pattern-cell" style="background:var(--chocolate);display:flex;align-items:center;justify-content:center;">
+      <span style="font-family:var(--f-stamp);font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(247,242,234,0.5);">Atelier CTA</span>
+    </div>
+    <div class="pattern-cell" style="background:var(--bg-dark);display:flex;align-items:center;justify-content:center;">
+      <span style="font-family:var(--f-stamp);font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(247,242,234,0.5);">Footer</span>
+    </div>
+  </div>
+
+  <div style="margin-top:36px;display:grid;grid-template-columns:1fr 1fr;gap:2px;">
+    <div style="padding:24px;background:var(--bg-warm);">
+      <span style="font-family:var(--f-label);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--tan);display:block;margin-bottom:12px;">Hero — Homepage</span>
+      <div style="display:grid;grid-template-columns:44fr 56fr;gap:2px;height:120px;">
+        <div style="background:var(--bg-dark);display:flex;align-items:center;justify-content:center;">
+          <span style="font-family:var(--f-stamp);font-size:9px;letter-spacing:0.14em;color:rgba(247,242,234,0.4);">Copy 44%</span>
+        </div>
+        <div style="background:var(--rule);display:flex;align-items:center;justify-content:center;">
+          <span style="font-family:var(--f-stamp);font-size:9px;letter-spacing:0.14em;color:var(--ink-mid);">Image 56%</span>
+        </div>
+      </div>
+    </div>
+    <div style="padding:24px;background:var(--bg-warm);">
+      <span style="font-family:var(--f-label);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--tan);display:block;margin-bottom:12px;">PDP — Product Detail</span>
+      <div style="display:grid;grid-template-columns:58fr 42fr;gap:2px;height:120px;">
+        <div style="background:var(--rule);display:flex;align-items:center;justify-content:center;">
+          <span style="font-family:var(--f-stamp);font-size:9px;letter-spacing:0.14em;color:var(--ink-mid);">Gallery 58%</span>
+        </div>
+        <div style="background:var(--bg-cream);border:1px solid var(--rule-lt);display:flex;align-items:center;justify-content:center;">
+          <span style="font-family:var(--f-stamp);font-size:9px;letter-spacing:0.14em;color:var(--ink-muted);">Info 42%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     PRODUCTS
+══════════════════════════════════ -->
+<div class="ds-section">
+  <span class="ds-eyebrow">06 — Products</span>
+  <h2 class="ds-heading">Product Catalog</h2>
+  <p class="ds-sub">Four products at launch. Juniper is the flagship. All pricing in USD.</p>
+
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:2px;">
+    <div style="background:var(--bg-warm);padding:24px 20px;">
+      <span style="font-family:var(--f-label);font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:var(--tan);display:block;margin-bottom:8px;">Flagship</span>
+      <div style="font-family:var(--f-display);font-size:1.2rem;font-weight:500;color:var(--ink);margin-bottom:4px;">The Juniper</div>
+      <div style="font-family:var(--f-label);font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:10px;">9×13" · CTO</div>
+      <div style="font-family:var(--f-display);font-size:1.1rem;font-weight:500;color:var(--ink-mid);">$280</div>
+    </div>
+    <div style="background:var(--bg-warm);padding:24px 20px;">
+      <span style="font-family:var(--f-label);font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:var(--ink-muted);display:block;margin-bottom:8px;">Mini</span>
+      <div style="font-family:var(--f-display);font-size:1.2rem;font-weight:500;color:var(--ink);margin-bottom:4px;">The Junie</div>
+      <div style="font-family:var(--f-label);font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:10px;">7×11" · CTO</div>
+      <div style="font-family:var(--f-display);font-size:1.1rem;font-weight:500;color:var(--ink-mid);">$225</div>
+    </div>
+    <div style="background:var(--bg-warm);padding:24px 20px;">
+      <span style="font-family:var(--f-label);font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:var(--ink-muted);display:block;margin-bottom:8px;">Accessory</span>
+      <div style="font-family:var(--f-display);font-size:1.2rem;font-weight:500;color:var(--ink);margin-bottom:4px;">Letter Wristlet</div>
+      <div style="font-family:var(--f-label);font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:10px;">6×9" · CTO</div>
+      <div style="font-family:var(--f-display);font-size:1.1rem;font-weight:500;color:var(--ink-mid);">$95</div>
+    </div>
+    <div style="background:var(--bg-warm);padding:24px 20px;opacity:0.6;">
+      <span style="font-family:var(--f-stamp);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink-muted);display:block;margin-bottom:8px;">Coming Soon</span>
+      <div style="font-family:var(--f-display);font-size:1.2rem;font-weight:500;color:var(--ink);margin-bottom:4px;">Keepsake Tote</div>
+      <div style="font-family:var(--f-label);font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:10px;">TBD · CTO</div>
+      <div style="font-family:var(--f-display);font-size:1.1rem;font-weight:500;color:var(--ink-mid);">$395</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     FOOTER SAMPLE
+══════════════════════════════════ -->
+<div class="ds-section">
+  <span class="ds-eyebrow">07 — Footer</span>
+  <h2 class="ds-heading">Footer</h2>
+  <p class="ds-sub">Dark background, 4-column layout (2fr + 1fr + 1fr + 1fr), sparse link density.</p>
+  <div class="footer-sample">
+    <div class="footer-logo">Indigo <em>Leather</em></div>
+    <p class="footer-tagline">Designer-made leather handbags in small batches. Crafted to Order from the collection. Ready to Ship when available.</p>
+    <div style="display:flex;gap:20px;margin-top:16px;">
+      <span style="font-family:var(--f-label);font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(247,242,234,0.28);">Instagram</span>
+      <span style="font-family:var(--f-label);font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(247,242,234,0.28);">Pinterest</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     MOTION & ANIMATION
+══════════════════════════════════ -->
+<div class="ds-section">
+  <span class="ds-eyebrow">08 — Motion</span>
+  <h2 class="ds-heading">Motion Tokens</h2>
+  <p class="ds-sub">Restrained animation — opacity + transform only. Scroll-reveal on all major sections via IntersectionObserver.</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;">
+    <div style="background:var(--bg-warm);padding:24px;">
+      <span style="font-family:var(--f-label);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--tan);display:block;margin-bottom:12px;">--ease-out</span>
+      <code style="font-family:var(--f-stamp);font-size:12px;color:var(--ink-mid);">cubic-bezier(0, 0, 0.2, 1)</code>
+      <p style="font-family:var(--f-display);font-size:0.85rem;font-style:italic;color:var(--ink-muted);margin-top:8px;">Buttons, hovers, reveals — decelerate into rest</p>
+    </div>
+    <div style="background:var(--bg-warm);padding:24px;">
+      <span style="font-family:var(--f-label);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--tan);display:block;margin-bottom:12px;">--ease-leather</span>
+      <code style="font-family:var(--f-stamp);font-size:12px;color:var(--ink-mid);">cubic-bezier(0.25, 0.46, 0.45, 0.94)</code>
+      <p style="font-family:var(--f-display);font-size:0.85rem;font-style:italic;color:var(--ink-muted);margin-top:8px;">Image gallery transitions, card hover zooms — organic feel</p>
+    </div>
+    <div style="background:var(--bg-cream);padding:24px;border:1px solid var(--rule-lt);">
+      <span style="font-family:var(--f-label);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink-muted);display:block;margin-bottom:12px;">Scroll Reveal</span>
+      <code style="font-family:var(--f-stamp);font-size:12px;color:var(--ink-mid);">opacity 0→1 + translateY(20px)→0<br/>duration: 0.7s · delays: 0.1–0.3s</code>
+    </div>
+    <div style="background:var(--bg-cream);padding:24px;border:1px solid var(--rule-lt);">
+      <span style="font-family:var(--f-label);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink-muted);display:block;margin-bottom:12px;">Button Active</span>
+      <code style="font-family:var(--f-stamp);font-size:12px;color:var(--ink-mid);">transform: scale(0.97)<br/>transition: 0.22s ease-out</code>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     LIVE SITE
+══════════════════════════════════ -->
+<div class="ds-section">
+  <span class="ds-eyebrow">09 — Reference</span>
+  <h2 class="ds-heading">Live Site & Pages</h2>
+  <p class="ds-sub">14 pages deployed at production. All pages share the same token map, header, and footer.</p>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;">
+    <div style="background:var(--bg-warm);padding:20px;">
+      <div style="font-family:var(--f-label);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--tan);margin-bottom:6px;">Shop</div>
+      <div style="font-family:var(--f-display);font-size:0.95rem;font-weight:500;color:var(--ink-mid);line-height:2;">Homepage (index.html)<br/>Collection PLP<br/>Ready to Ship<br/>Juniper PDP<br/>Junie PDP<br/>Letter Wristlet PDP<br/>Cart</div>
+    </div>
+    <div style="background:var(--bg-warm);padding:20px;">
+      <div style="font-family:var(--f-label);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--tan);margin-bottom:6px;">Studio</div>
+      <div style="font-family:var(--f-display);font-size:0.95rem;font-weight:500;color:var(--ink-mid);line-height:2;">About<br/>Events & Markets<br/>Commissions<br/>Journal (index)<br/>Journal — Patina<br/>Journal — Break-In<br/>Journal — The Difference</div>
+    </div>
+    <div style="background:var(--bg-warm);padding:20px;">
+      <div style="font-family:var(--f-label);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--tan);margin-bottom:6px;">Production URL</div>
+      <div style="font-family:var(--f-stamp);font-size:11px;letter-spacing:0.1em;color:var(--ink-mid);line-height:2;word-break:break-all;">indigo-leather.vercel.app</div>
+      <div style="font-family:var(--f-label);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--tan);margin-bottom:6px;margin-top:16px;">Stack</div>
+      <div style="font-family:var(--f-display);font-size:0.9rem;font-style:italic;color:var(--ink-mid);line-height:1.75;">Static HTML · Inline CSS<br/>Google Fonts (variable)<br/>IntersectionObserver reveals<br/>Vercel deploy</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /.ds-wrap -->
+</body>
+</html>
