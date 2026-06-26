@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Commissions — Indigo Leather</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Barlow+Condensed:wght@300;400;500;600&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    /* --- Reset --- */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 19px; scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--ink); font-family: var(--f-display); -webkit-font-smoothing: antialiased; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; background: none; border: none; font: inherit; }
+
+    /* --- Tokens --- */
+    :root {
+      --bg:            #F7F2EA;
+      --bg-warm:       #EDE5D8;
+      --bg-cream:      #FAF8F4;
+      --bg-dark:       #1E1208;
+      --chocolate:     #3D2010;
+      --tan:           #B8824A;
+      --saddle:        #8B5A2B;
+      --camel:         #C4975A;
+      --indigo:        #2B3A5C;
+      --hunter:        #2D4A35;
+      --brass:         #B8922A;
+      --ink:           #1E1208;
+      --ink-warm:      #3D2A1A;
+      --ink-mid:       #6B4E34;
+      --ink-muted:     #9E8878;
+      --ink-light:     #C4B09A;
+      --ink-inv:       #F7F2EA;
+      --rule:          #C9B49A;
+      --rule-lt:       #E2D5C0;
+      --rule-dk:       #8B6A4A;
+      --f-display: 'Playfair Display', Georgia, serif;
+      --f-label:   'Barlow Condensed', 'Arial Narrow', sans-serif;
+      --f-stamp:   'Courier Prime', 'Courier New', monospace;
+      --ease-out: cubic-bezier(0, 0, 0.2, 1);
+      --ease-leather: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    /* --- Utilities --- */
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+    .eyebrow { font-family: var(--f-label); font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--tan); display: block; margin-bottom: 12px; }
+    .section-title { font-family: var(--f-display); font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 500; color: var(--ink); }
+    .section-body { font-family: var(--f-display); font-size: 19px; font-style: italic; font-weight: 500; color: var(--ink-mid); line-height: 1.75; }
+    .stamp { font-family: var(--f-stamp); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-muted); }
+
+    [data-reveal] { opacity: 0; transform: translateY(20px); transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out); }
+    [data-reveal].visible { opacity: 1; transform: none; }
+    [data-reveal][data-d="1"] { transition-delay: 0.1s; }
+    [data-reveal][data-d="2"] { transition-delay: 0.2s; }
+    [data-reveal][data-d="3"] { transition-delay: 0.3s; }
+
+    /* --- Announcement Bar --- */
+    .ann { background: var(--chocolate); color: var(--ink-inv); text-align: center; padding: 9px 24px; font-family: var(--f-label); font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; }
+
+    /* --- Header --- */
+    .hdr { position: sticky; top: 0; z-index: 200; background: var(--bg); border-bottom: 1px solid var(--rule-lt); transition: box-shadow 0.25s; }
+    .hdr.scrolled { box-shadow: 0 2px 20px rgba(30,18,8,0.07); }
+        .hdr__inner {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 32px;
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+    .hdr__nav { display: flex; gap: 28px; }
+    .hdr__nav a {
+      font-family: var(--f-label);
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-mid);
+      transition: color 0.2s;
+      white-space: nowrap;
+    }
+    .hdr__nav a:hover, .hdr__nav a.active { color: var(--tan); }
+    .hdr__logo {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--f-display);
+      font-size: 20px;
+      font-weight: 500;
+      font-style: italic;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .hdr__logo em { font-style: italic; color: var(--tan); }
+    .hdr__actions { display: flex; justify-content: flex-end; align-items: center; gap: 18px; }
+    .hdr__icon { font-family: var(--f-label); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-mid); cursor: pointer; min-height: 44px; display: flex; align-items: center; transition: color 0.2s; }
+    .hdr__icon:hover { color: var(--tan); }
+    .cart-pip { display: inline-flex; align-items: center; justify-content: center; width: 15px; height: 15px; background: var(--tan); color: #fff; border-radius: 50%; font-size: 10px; margin-left: 4px; }
+
+    /* --- Buttons --- */
+    .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 12px 28px; font-family: var(--f-label); font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; transition: all 0.22s var(--ease-out); white-space: nowrap; }
+    .btn:active { transform: scale(0.97); }
+    .btn--primary { background: var(--ink); color: var(--ink-inv); border: 1px solid var(--ink); }
+    .btn--primary:hover { background: var(--chocolate); border-color: var(--chocolate); }
+    .btn--ghost { background: transparent; color: var(--ink); border: 1px solid var(--rule); }
+    .btn--ghost:hover { border-color: var(--ink); }
+    .btn--ghost-inv { background: transparent; color: var(--ink-inv); border: 1px solid rgba(247,242,234,0.35); }
+    .btn--ghost-inv:hover { background: var(--ink-inv); color: var(--ink); border-color: var(--ink-inv); }
+    .btn--tan { background: var(--tan); color: #fff; border: 1px solid var(--tan); }
+    .btn--tan:hover { background: var(--saddle); border-color: var(--saddle); }
+
+    /* --- Page Hero --- */
+    .page-hero { background: var(--bg); padding: 120px 48px 100px; border-bottom: 1px solid var(--rule-lt); }
+    .page-hero__inner { max-width: 680px; }
+    .page-hero__h1 { font-family: var(--f-display); font-size: clamp(2.6rem, 5vw, 4.2rem); font-weight: 500; color: var(--ink); line-height: 1.1; margin-bottom: 24px; }
+    .page-hero__sub { font-family: var(--f-display); font-size: 1.1rem; font-weight: 500; color: var(--ink-mid); line-height: 1.8; margin-bottom: 24px; }
+    .page-hero__note { font-family: var(--f-stamp); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-muted); border-top: 1px solid var(--rule-lt); padding-top: 18px; margin-top: 8px; }
+
+    /* --- Is This Right Section --- */
+    .qualifier { background: var(--bg-warm); padding: 100px 48px; }
+    .qualifier__inner { max-width: 1280px; margin: 0 auto; }
+    .qualifier__heading { font-family: var(--f-display); font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 500; color: var(--ink); margin-bottom: 56px; }
+    .qualifier__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+    .qualifier__col { background: var(--bg); padding: 44px 40px; }
+    .qualifier__col-title { font-family: var(--f-label); font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; margin-bottom: 28px; }
+    .qualifier__col--yes .qualifier__col-title { color: var(--tan); }
+    .qualifier__col--no .qualifier__col-title { color: var(--ink-muted); }
+    .qualifier__list { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+    .qualifier__item { font-family: var(--f-display); font-size: 1rem; font-weight: 500; color: var(--ink-warm); line-height: 1.6; display: flex; gap: 14px; align-items: baseline; }
+    .qualifier__check { font-family: var(--f-label); font-size: 13px; flex-shrink: 0; }
+    .qualifier__col--yes .qualifier__check { color: var(--tan); }
+    .qualifier__col--no .qualifier__check { color: var(--ink-muted); }
+    .qualifier__cto-link { display: inline-block; margin-top: 28px; font-family: var(--f-label); font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--tan); border-bottom: 1px solid var(--tan); padding-bottom: 2px; transition: color 0.2s, border-color 0.2s; }
+    .qualifier__cto-link:hover { color: var(--saddle); border-color: var(--saddle); }
+
+    /* --- Expect Section --- */
+    .expect { background: var(--bg); padding: 100px 48px; }
+    .expect__inner { max-width: 1280px; margin: 0 auto; }
+    .expect__heading { font-family: var(--f-display); font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 500; color: var(--ink); margin-bottom: 64px; }
+    .expect__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-bottom: 64px; }
+    .expect__block { background: var(--bg-warm); padding: 40px 36px; }
+    .expect__block-label { font-family: var(--f-label); font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--tan); margin-bottom: 14px; }
+    .expect__block-value { font-family: var(--f-display); font-size: 1.35rem; font-weight: 500; color: var(--ink); line-height: 1.45; }
+    .expect__block-note { font-family: var(--f-display); font-size: 0.9rem; font-style: italic; font-weight: 500; color: var(--ink-mid); margin-top: 10px; line-height: 1.7; }
+    .expect__steps-heading { font-family: var(--f-label); font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 28px; }
+    .expect__steps { list-style: none; display: flex; flex-direction: column; gap: 0; border-top: 1px solid var(--rule-lt); }
+    .expect__step { display: flex; gap: 28px; align-items: baseline; padding: 24px 0; border-bottom: 1px solid var(--rule-lt); }
+    .expect__step-num { font-family: var(--f-display); font-size: 1.4rem; font-weight: 500; color: var(--ink-light); flex-shrink: 0; width: 24px; }
+    .expect__step-text { font-family: var(--f-display); font-size: 1rem; font-weight: 500; color: var(--ink-warm); line-height: 1.65; }
+
+    /* --- Inquiry Form --- */
+    .inquiry { background: var(--bg-warm); padding: 100px 48px; }
+    .inquiry__inner { max-width: 680px; margin: 0 auto; }
+    .inquiry__heading { font-family: var(--f-display); font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 500; color: var(--ink); margin-bottom: 12px; }
+    .inquiry__sub { font-family: var(--f-display); font-size: 1rem; font-style: italic; font-weight: 500; color: var(--ink-mid); margin-bottom: 48px; line-height: 1.7; }
+    .form-field { margin-bottom: 28px; }
+    .form-label { font-family: var(--f-label); font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--ink-muted); display: block; margin-bottom: 10px; }
+    .form-input,
+    .form-textarea { width: 100%; padding: 14px 16px; font-family: var(--f-display); font-size: 19px; font-weight: 500; background: var(--bg); border: 1px solid var(--rule); color: var(--ink); outline: none; transition: border-color 0.2s; }
+    .form-input:focus,
+    .form-textarea:focus { border-color: var(--tan); }
+    .form-input::placeholder,
+    .form-textarea::placeholder { color: var(--ink-light); }
+    .form-textarea { min-height: 120px; resize: vertical; line-height: 1.6; }
+    .form-submit { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 14px 36px; font-family: var(--f-label); font-size: 17px; letter-spacing: 0.22em; text-transform: uppercase; background: var(--ink); color: var(--ink-inv); border: 1px solid var(--ink); cursor: pointer; transition: all 0.22s var(--ease-out); }
+    .form-submit:hover { background: var(--chocolate); border-color: var(--chocolate); }
+    .form-submit:active { transform: scale(0.97); }
+    .inquiry__note { font-family: var(--f-display); font-size: 0.9rem; font-style: italic; font-weight: 500; color: var(--ink-muted); margin-top: 28px; line-height: 1.75; border-top: 1px solid var(--rule-lt); padding-top: 24px; }
+
+    /* --- Footer --- */
+    .footer { background: var(--bg-dark); color: var(--ink-inv); padding: 64px 48px 40px; }
+    .footer__top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 56px; border-bottom: 1px solid rgba(247,242,234,0.08); margin-bottom: 32px; max-width: 1440px; margin-left: auto; margin-right: auto; }
+    .footer__logo { font-family: var(--f-display); font-size: 1.4rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 16px; }
+    .footer__logo em { font-style: italic; color: var(--tan); }
+    .footer__tagline { font-family: var(--f-display); font-size: 0.9rem; font-style: italic; font-weight: 500; color: rgba(247,242,234,0.38); line-height: 1.85; max-width: 28ch; margin-bottom: 28px; }
+    .footer__social { display: flex; gap: 20px; }
+    .footer__social a { font-family: var(--f-label); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(247,242,234,0.28); border-bottom: 1px solid rgba(247,242,234,0.1); padding-bottom: 1px; transition: color 0.2s; }
+    .footer__social a:hover { color: var(--tan); }
+    .footer__col-title { font-family: var(--f-label); font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(247,242,234,0.28); margin-bottom: 20px; }
+    .footer__links { display: flex; flex-direction: column; gap: 12px; }
+    .footer__links a { font-family: var(--f-display); font-size: 0.9rem; font-weight: 500; color: rgba(247,242,234,0.55); transition: color 0.2s; }
+    .footer__links a:hover { color: var(--ink-inv); }
+    .footer__bottom { display: flex; justify-content: space-between; align-items: center; max-width: 1440px; margin: 0 auto; }
+    .footer__copy { font-family: var(--f-label); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(247,242,234,0.18); }
+  </style>
+</head>
+<body>
+
+  <div class="ann" role="status">Each piece is made by hand after your order is placed &middot; 4&ndash;5 week lead time</div>
+
+  <header class="hdr" id="hdr">
+    <div class="hdr__inner">
+      <nav class="hdr__nav" aria-label="Main navigation">
+        <a href="index.html">Collection</a>
+        <a href="ready-to-ship.html">Ready to Ship</a>
+        <a href="events.html">Events</a>
+        <a href="about.html">About</a>
+        <a href="commissions.html" class="active">Commissions</a>
+      </nav>
+      <a href="index.html" class="hdr__logo" aria-label="Indigo Leather — Home">Indigo <em>Leather</em></a>
+      <div class="hdr__actions">
+        <a href="#" class="hdr__icon" aria-label="Search">Search</a>
+        <a href="#" class="hdr__icon" aria-label="Account">Account</a>
+        <a href="cart.html" class="hdr__icon" aria-label="Bag">Bag <span class="cart-pip" aria-hidden="true">0</span></a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 1. Page Hero -->
+  <section class="page-hero" aria-label="Commissions introduction">
+    <div class="page-hero__inner">
+      <span class="eyebrow" data-reveal>Commissions</span>
+      <h1 class="page-hero__h1" data-reveal data-d="1">Something outside the collection.</h1>
+      <p class="page-hero__sub" data-reveal data-d="2">For requests that fall outside the defined options &mdash; one-of-a-kind pieces, specific materials, special projects &mdash; a commission may be the right path.</p>
+      <p class="page-hero__note" data-reveal data-d="3">Most customers find what they&rsquo;re looking for in the collection. Commissions are for everyone else.</p>
+    </div>
+  </section>
+
+  <!-- 2. Is This Right -->
+  <section class="qualifier" aria-label="Is a commission right for you">
+    <div class="qualifier__inner">
+      <h2 class="qualifier__heading" data-reveal>Is a commission right for you?</h2>
+      <div class="qualifier__grid">
+        <div class="qualifier__col qualifier__col--yes" data-reveal>
+          <div class="qualifier__col-title">This IS a commission</div>
+          <ul class="qualifier__list" role="list">
+            <li class="qualifier__item"><span class="qualifier__check" aria-hidden="true">&#10003;</span><span>You need a specific material not in the collection</span></li>
+            <li class="qualifier__item"><span class="qualifier__check" aria-hidden="true">&#10003;</span><span>You need dimensions or proportions different from existing pieces</span></li>
+            <li class="qualifier__item"><span class="qualifier__check" aria-hidden="true">&#10003;</span><span>You&rsquo;d like hand tooling or a decorative element on the flap</span></li>
+            <li class="qualifier__item"><span class="qualifier__check" aria-hidden="true">&#10003;</span><span>You&rsquo;re looking for a one-of-a-kind piece as a gift</span></li>
+          </ul>
+        </div>
+        <div class="qualifier__col qualifier__col--no" data-reveal data-d="1">
+          <div class="qualifier__col-title">This is NOT a commission &mdash; this is Crafted to Order</div>
+          <ul class="qualifier__list" role="list">
+            <li class="qualifier__item"><span class="qualifier__check" aria-hidden="true">&rarr;</span><span>You want a bag from the collection in an available color</span></li>
+            <li class="qualifier__item"><span class="qualifier__check" aria-hidden="true">&rarr;</span><span>You want to choose your hardware or strap configuration</span></li>
+            <li class="qualifier__item"><span class="qualifier__check" aria-hidden="true">&rarr;</span><span>You want a bag that ships in 4&ndash;5 weeks</span></li>
+          </ul>
+          <a href="index.html" class="qualifier__cto-link">Browse the Collection</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. What to Expect -->
+  <section class="expect" aria-label="What to expect">
+    <div class="expect__inner">
+      <h2 class="expect__heading" data-reveal>What to expect</h2>
+      <div class="expect__grid">
+        <div class="expect__block" data-reveal>
+          <div class="expect__block-label">Timeline</div>
+          <div class="expect__block-value">8&ndash;14 weeks</div>
+          <p class="expect__block-note">Depending on complexity, materials, and current workload.</p>
+        </div>
+        <div class="expect__block" data-reveal data-d="1">
+          <div class="expect__block-label">Pricing</div>
+          <div class="expect__block-value">$400&ndash;$1,200</div>
+          <p class="expect__block-note">Commissions are priced individually based on complexity, materials, and finish. A quote is provided before any deposit is required.</p>
+        </div>
+      </div>
+      <p class="expect__steps-heading" data-reveal>The process</p>
+      <ol class="expect__steps" data-reveal data-d="1">
+        <li class="expect__step">
+          <span class="expect__step-num">1</span>
+          <span class="expect__step-text">Submit the inquiry form below</span>
+        </li>
+        <li class="expect__step">
+          <span class="expect__step-num">2</span>
+          <span class="expect__step-text">I&rsquo;ll follow up within 5&ndash;7 business days to discuss the request</span>
+        </li>
+        <li class="expect__step">
+          <span class="expect__step-num">3</span>
+          <span class="expect__step-text">If we move forward, a 50% deposit is required to begin</span>
+        </li>
+        <li class="expect__step">
+          <span class="expect__step-num">4</span>
+          <span class="expect__step-text">The remaining 50% is due before shipping</span>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 4. Inquiry Form -->
+  <section class="inquiry" aria-label="Commission inquiry form">
+    <div class="inquiry__inner">
+      <h2 class="inquiry__heading" data-reveal>Send an inquiry</h2>
+      <p class="inquiry__sub" data-reveal data-d="1">Tell me what you have in mind. The more detail, the better.</p>
+      <form onsubmit="return false;" aria-label="Commission inquiry" data-reveal data-d="2">
+        <div class="form-field">
+          <label class="form-label" for="name">Name</label>
+          <input class="form-input" type="text" id="name" name="name" autocomplete="name" placeholder="Your name" />
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="email">Email</label>
+          <input class="form-input" type="email" id="email" name="email" autocomplete="email" placeholder="your@email.com" />
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="vision">What are you envisioning?</label>
+          <textarea class="form-textarea" id="vision" name="vision" placeholder="Describe the bag, material, use case, occasion &mdash; whatever is most relevant."></textarea>
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="referral">How did you hear about Indigo Leather? <span style="font-family:var(--f-display);font-size:0.85rem;font-style:italic;letter-spacing:0;text-transform:none;color:var(--ink-light);">(optional)</span></label>
+          <input class="form-input" type="text" id="referral" name="referral" placeholder="Instagram, a friend, a market event..." />
+        </div>
+        <button class="form-submit" type="submit">Send Inquiry</button>
+      </form>
+      <p class="inquiry__note" data-reveal data-d="3">I review every commission request personally. If your project isn&rsquo;t something I can take on right now, I&rsquo;ll let you know.</p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer__top">
+      <div>
+        <div class="footer__logo">Indigo <em>Leather</em></div>
+        <p class="footer__tagline">Designer-made leather handbags in small batches. Crafted to Order from the collection. Ready to Ship when available.</p>
+        <div class="footer__social">
+          <a href="#" aria-label="Instagram">Instagram</a>
+          <a href="#" aria-label="Pinterest">Pinterest</a>
+        </div>
+      </div>
+      <nav aria-label="Shop navigation">
+        <div class="footer__col-title">Shop</div>
+        <div class="footer__links">
+          <a href="collection.html">The Collection</a>
+          <a href="juniper.html">Juniper</a>
+          <a href="junie.html">Junie</a>
+          <a href="letter-wristlet.html">Letter Wristlet</a>
+          <a href="ready-to-ship.html">Ready to Ship</a>
+        </div>
+      </nav>
+      <nav aria-label="Studio navigation">
+        <div class="footer__col-title">Studio</div>
+        <div class="footer__links">
+          <a href="about.html">About the Designer</a>
+          <a href="events.html">Events &amp; Markets</a>
+          <a href="commissions.html">Commissions</a>
+          <a href="journal.html">Journal</a>
+        </div>
+      </nav>
+      <nav aria-label="Support navigation">
+        <div class="footer__col-title">Support</div>
+        <div class="footer__links">
+          <a href="#">Crafted-to-Order FAQ</a>
+          <a href="#">Shipping &amp; Returns</a>
+          <a href="#">Leather Care Guide</a>
+          <a href="#">Contact</a>
+          <a href="#">Atelier List</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer__bottom">
+      <p class="footer__copy">&copy; 2026 Indigo Leather. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    const hdr = document.getElementById('hdr');
+    window.addEventListener('scroll', () => hdr.classList.toggle('scrolled', window.scrollY > 10), { passive: true });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

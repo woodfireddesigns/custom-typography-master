@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Breaking In New Leather (And What to Expect in the First 90 Days) — Indigo Leather Journal</title>
+  <meta name="description" content="New leather is stiff. That's not a defect — it's a sign of quality. Here's what to expect from your Indigo bag in the first 90 days." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Barlow+Condensed:wght@300;400;500;600&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 19px; scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--ink); font-family: var(--f-display); -webkit-font-smoothing: antialiased; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; background: none; border: none; font: inherit; }
+
+    :root {
+      --bg:            #F7F2EA;
+      --bg-warm:       #EDE5D8;
+      --bg-cream:      #FAF8F4;
+      --bg-dark:       #1E1208;
+      --chocolate:     #3D2010;
+      --tan:           #B8824A;
+      --saddle:        #8B5A2B;
+      --camel:         #C4975A;
+      --indigo:        #2B3A5C;
+      --hunter:        #2D4A35;
+      --brass:         #B8922A;
+      --ink:           #1E1208;
+      --ink-warm:      #3D2A1A;
+      --ink-mid:       #6B4E34;
+      --ink-muted:     #9E8878;
+      --ink-light:     #C4B09A;
+      --ink-inv:       #F7F2EA;
+      --rule:          #C9B49A;
+      --rule-lt:       #E2D5C0;
+      --rule-dk:       #8B6A4A;
+      --f-display: 'Playfair Display', Georgia, serif;
+      --f-label:   'Barlow Condensed', 'Arial Narrow', sans-serif;
+      --f-stamp:   'Courier Prime', 'Courier New', monospace;
+      --ease-out: cubic-bezier(0, 0, 0.2, 1);
+      --ease-leather: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+
+    /* Announcement bar */
+    .ann { background: var(--chocolate); color: var(--ink-inv); text-align: center; padding: 9px 24px; font-family: var(--f-label); font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; }
+
+    /* Header */
+    .hdr { position: sticky; top: 0; z-index: 200; background: var(--bg); border-bottom: 1px solid var(--rule-lt); transition: box-shadow 0.25s; }
+    .hdr.scrolled { box-shadow: 0 2px 20px rgba(30,18,8,0.07); }
+        .hdr__inner {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 32px;
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+    .hdr__nav { display: flex; gap: 28px; }
+    .hdr__nav a {
+      font-family: var(--f-label);
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-mid);
+      transition: color 0.2s;
+      white-space: nowrap;
+    }
+    .hdr__nav a:hover, .hdr__nav a.active { color: var(--tan); }
+    .hdr__logo {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--f-display);
+      font-size: 20px;
+      font-weight: 500;
+      font-style: italic;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .hdr__logo em { font-style: italic; color: var(--tan); }
+    .hdr__actions { display: flex; justify-content: flex-end; align-items: center; gap: 18px; }
+    .hdr__icon { font-family: var(--f-label); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-mid); cursor: pointer; min-height: 44px; display: flex; align-items: center; transition: color 0.2s; }
+    .hdr__icon:hover { color: var(--tan); }
+    .cart-pip { display: inline-flex; align-items: center; justify-content: center; width: 15px; height: 15px; background: var(--tan); color: #fff; border-radius: 50%; font-size: 10px; margin-left: 4px; }
+
+    /* Buttons */
+    .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 12px 28px; font-family: var(--f-label); font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; transition: all 0.22s var(--ease-out); white-space: nowrap; }
+    .btn:active { transform: scale(0.97); }
+    .btn--primary { background: var(--ink); color: var(--ink-inv); border: 1px solid var(--ink); }
+    .btn--primary:hover { background: var(--chocolate); border-color: var(--chocolate); }
+    .btn--ghost { background: transparent; color: var(--ink); border: 1px solid var(--rule); }
+    .btn--ghost:hover { border-color: var(--ink); }
+    .btn--tan { background: var(--tan); color: #fff; border: 1px solid var(--tan); }
+    .btn--tan:hover { background: var(--saddle); border-color: var(--saddle); }
+
+    /* Typography */
+    .eyebrow { font-family: var(--f-label); font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--tan); display: block; margin-bottom: 12px; }
+    .stamp { font-family: var(--f-stamp); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-muted); }
+
+    /* Scroll reveal */
+    [data-reveal] { opacity: 0; transform: translateY(20px); transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out); }
+    [data-reveal].visible { opacity: 1; transform: none; }
+    [data-reveal][data-d="1"] { transition-delay: 0.1s; }
+    [data-reveal][data-d="2"] { transition-delay: 0.2s; }
+    [data-reveal][data-d="3"] { transition-delay: 0.3s; }
+
+    /* Post header */
+    .post-header { max-width: 760px; margin: 0 auto; padding: 64px 48px 48px; text-align: center; }
+    .post-header__meta { display: flex; align-items: center; justify-content: center; gap: 20px; margin-bottom: 28px; flex-wrap: wrap; }
+    .post-category { font-family: var(--f-label); font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--tan); }
+    .post-date { font-family: var(--f-stamp); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-muted); }
+    .post-readtime { font-family: var(--f-stamp); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-muted); }
+    .post-meta-sep { color: var(--rule); }
+    .post-header h1 { font-family: var(--f-display); font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 500; color: var(--ink); line-height: 1.15; letter-spacing: 0.02em; }
+
+    /* Hero image */
+    .post-hero { max-width: 1100px; margin: 0 auto; padding: 0 48px 64px; }
+    .post-hero img { width: 100%; aspect-ratio: 16/9; object-fit: cover; }
+
+    /* Article body */
+    .post-body { max-width: 68ch; margin: 0 auto; padding: 0 48px; font-size: 19px; line-height: 1.85; font-family: var(--f-display); color: var(--ink-warm); }
+    .post-body p { margin-bottom: 1.5em; }
+    .post-body h2 { font-family: var(--f-display); font-size: 1.4rem; font-weight: 500; color: var(--ink); margin: 2em 0 0.75em; letter-spacing: 0.01em; }
+    .post-body blockquote { border-left: 3px solid var(--tan); padding-left: 24px; font-style: italic; color: var(--ink-mid); margin: 2em 0; }
+
+    /* Author byline */
+    .post-byline { max-width: 68ch; margin: 48px auto 0; padding: 32px 48px; border-top: 1px solid var(--rule-lt); border-bottom: 1px solid var(--rule-lt); display: flex; align-items: center; gap: 20px; }
+    .post-byline__label { font-family: var(--f-label); font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--ink-muted); display: block; margin-bottom: 6px; }
+    .post-byline__name { font-family: var(--f-display); font-size: 19px; font-weight: 500; color: var(--ink); }
+
+    /* Continue reading */
+    .continue-reading { max-width: 1100px; margin: 0 auto; padding: 80px 48px; }
+    .continue-reading__label { font-family: var(--f-label); font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 40px; }
+    .continue-reading__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+    .read-card__img { overflow: hidden; margin-bottom: 20px; }
+    .read-card__img img { width: 100%; aspect-ratio: 3/2; object-fit: cover; transition: transform 0.5s var(--ease-leather); }
+    .read-card:hover .read-card__img img { transform: scale(1.03); }
+    .read-card__category { font-family: var(--f-label); font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--tan); display: block; margin-bottom: 10px; }
+    .read-card__title { font-family: var(--f-display); font-size: 1.2rem; font-weight: 500; color: var(--ink); line-height: 1.3; margin-bottom: 16px; }
+    .post-link { font-family: var(--f-label); font-size: 19px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--tan); border-bottom: 1px solid var(--tan); padding-bottom: 2px; transition: color 0.2s, border-color 0.2s; }
+    .post-link:hover { color: var(--saddle); border-color: var(--saddle); }
+
+    /* Shop CTA */
+    .shop-cta { background: var(--bg-warm); padding: 80px 48px; text-align: center; border-top: 1px solid var(--rule-lt); }
+    .shop-cta__inner { max-width: 500px; margin: 0 auto; }
+    .shop-cta__title { font-family: var(--f-display); font-size: clamp(1.6rem, 2.5vw, 2.4rem); font-weight: 500; color: var(--ink); margin-bottom: 16px; }
+    .shop-cta__sub { font-family: var(--f-display); font-size: 17px; font-style: italic; font-weight: 500; color: var(--ink-mid); line-height: 1.75; margin-bottom: 32px; }
+
+    /* Footer */
+    .footer { background: var(--bg-dark); color: var(--ink-inv); padding: 64px 48px 40px; }
+    .footer__top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 56px; border-bottom: 1px solid rgba(247,242,234,0.08); margin-bottom: 32px; max-width: 1440px; margin-left: auto; margin-right: auto; }
+    .footer__logo { font-family: var(--f-display); font-size: 1.4rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 16px; }
+    .footer__logo em { font-style: italic; color: var(--tan); }
+    .footer__tagline { font-family: var(--f-display); font-size: 0.9rem; font-style: italic; font-weight: 500; color: rgba(247,242,234,0.38); line-height: 1.85; max-width: 28ch; margin-bottom: 28px; }
+    .footer__social { display: flex; gap: 20px; }
+    .footer__social a { font-family: var(--f-label); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(247,242,234,0.28); border-bottom: 1px solid rgba(247,242,234,0.1); padding-bottom: 1px; transition: color 0.2s; }
+    .footer__social a:hover { color: var(--tan); }
+    .footer__col-title { font-family: var(--f-label); font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(247,242,234,0.28); margin-bottom: 20px; }
+    .footer__links { display: flex; flex-direction: column; gap: 12px; }
+    .footer__links a { font-family: var(--f-display); font-size: 0.9rem; font-weight: 500; color: rgba(247,242,234,0.55); transition: color 0.2s; }
+    .footer__links a:hover { color: var(--ink-inv); }
+    .footer__bottom { display: flex; justify-content: space-between; align-items: center; max-width: 1440px; margin: 0 auto; }
+    .footer__copy { font-family: var(--f-label); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(247,242,234,0.18); }
+  </style>
+</head>
+<body>
+
+  <div class="ann" role="status">Each piece is made by hand after your order is placed &middot; 4&ndash;5 week lead time</div>
+
+  <header class="hdr" id="hdr">
+    <div class="hdr__inner">
+      <nav class="hdr__nav" aria-label="Main navigation">
+        <a href="index.html">Collection</a>
+        <a href="ready-to-ship.html">Ready to Ship</a>
+        <a href="events.html">Events</a>
+        <a href="about.html">About</a>
+        <a href="commissions.html">Commissions</a>
+      </nav>
+      <a href="index.html" class="hdr__logo" aria-label="Indigo Leather — Home">Indigo <em>Leather</em></a>
+      <div class="hdr__actions">
+        <a href="#" class="hdr__icon" aria-label="Search">Search</a>
+        <a href="#" class="hdr__icon" aria-label="Account">Account</a>
+        <a href="cart.html" class="hdr__icon" aria-label="Bag">Bag <span class="cart-pip" aria-hidden="true">0</span></a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Post Header -->
+  <div style="border-bottom: 1px solid var(--rule-lt);">
+    <div class="post-header" data-reveal>
+      <div class="post-header__meta">
+        <span class="post-category">Leather Care</span>
+        <span class="post-meta-sep">&middot;</span>
+        <span class="post-date">June 10, 2026</span>
+        <span class="post-meta-sep">&middot;</span>
+        <span class="post-readtime">7 min read</span>
+      </div>
+      <h1>Breaking In New Leather (And What to Expect in the First 90 Days)</h1>
+    </div>
+  </div>
+
+  <!-- Hero Image -->
+  <div class="post-hero" data-reveal>
+    <img
+      src="../outputs/studio/IL_STUDIO_03_flatlay-overhead_20260614.png"
+      alt="Indigo Leather bag flatlay — overhead view showing texture and hardware"
+      loading="eager"
+    />
+  </div>
+
+  <!-- Article Body -->
+  <article class="post-body" data-reveal>
+
+    <p>New leather is stiff. The zipper pull is crisp. The snap closes with resistance. The bag holds its shape as though it were made of something more rigid than hide &mdash; and in a way, it was. Before a leather bag leaves the studio, the leather is fresh, the fibers tightly structured, the surface barely touched by the world. That stiffness is not a defect. It is a sign of quality.</p>
+
+    <p>Corrected grain leather and synthetic materials are often pre-softened to feel supple at the point of sale. Full-grain leather is not. It arrives structured because it is structured &mdash; because the natural fibers have not yet been worked through, and because no coating has been applied to make it feel like something it isn&rsquo;t. What you feel when you pick up an Indigo bag for the first time is the leather before it knows you. The next 90 days are how it learns.</p>
+
+    <h2>Weeks One and Two: The First Impressions</h2>
+
+    <p>Expect the bag to feel more formal than expected. The flap on a Juniper will open with purpose. The pebble grain will feel textured, slightly cool to the touch, slightly resistant. The strap will hold its shape rather than draping. These are all correct.</p>
+
+    <p>If you carry the bag daily, you will notice small things already shifting by the end of the second week. Where your hand holds the strap, the leather will begin to warm and soften slightly. The hardware will start to acquire a slight patina at the contact points &mdash; brass develops a lived warmth rather quickly. The pebble texture may appear slightly more settled in the areas that see the most handling.</p>
+
+    <p>Do not try to accelerate this. The leather is doing its own work. Aggressive conditioning at this stage does more harm than good &mdash; it can unevenly darken a hide that has not yet had a chance to develop organically, and it can soften structure that is better left to relax on its own timetable.</p>
+
+    <h2>Month One: The Leather Relaxes</h2>
+
+    <p>By the end of the first month of regular use, the character of the bag begins to emerge. The pebble grain deepens. If it is a Saddle or Espresso bag, the color will have shifted slightly &mdash; richer in the areas that have seen handling, slightly lighter in the areas that have not. This variation is not imperfection. It is the beginning of the bag becoming particular to you.</p>
+
+    <blockquote>The leather starts to learn how you carry it. It begins to conform to your shoulder, your hand, your preferred way of opening it. It becomes easier to use without becoming less structured &mdash; the difference between broken in and broken down.</blockquote>
+
+    <p>The snap and zipper will also have eased somewhat. Full-grain leather hardware interfaces soften at contact points with use, not with force. If the snap was very firm at the start, it will be noticeably more settled by week four or five. This is correct behavior.</p>
+
+    <h2>Months Two and Three: The Relationship Forms</h2>
+
+    <p>This is when most people start to love it.</p>
+
+    <p>By the second and third month, the leather has developed real memory. The compression points &mdash; where the bag rests against your hip when you carry it crossbody, where the strap meets the D-ring, where the flap folds &mdash; begin to show the particular lines of your use. These are not scratches. They are the permanent record of how this bag has lived with you. They are what makes yours different from anyone else&rsquo;s, even one ordered in the same color on the same day.</p>
+
+    <p>The pebble grain texture will have settled into itself. If you ordered a Saddle bag, the leather may have deepened slightly toward a golden tan in the high-touch areas, while remaining more consistently camel-toned in the areas that see less handling. Harbor leather develops extraordinary depth over this period &mdash; the dark teal enriches and the pebble texture becomes almost dimensional.</p>
+
+    <h2>What to Do</h2>
+
+    <p>The most important thing is to carry it. Daily use is the best thing for full-grain leather. The warmth of your body, the natural oils from your hands, the gentle flex and release of the bag moving with you &mdash; all of this is conditioning. The bag does not need much else.</p>
+
+    <p>Fill it lightly for the first few uses. Overstuffing new leather can push the structure in directions it has not yet learned to accommodate, and can create stress points that are more dramatic than they need to be. A moderately filled bag will develop its shape more gracefully than one stuffed beyond its natural capacity in week one.</p>
+
+    <p>If you can, carry it daily rather than rotating it out constantly during the break-in period. Consistency of use during the first 90 days helps the leather develop evenly. A bag that sits unused for three weeks at a stretch between uses will take longer to settle.</p>
+
+    <h2>What Not to Do</h2>
+
+    <p>Do not condition excessively in the first 90 days. One light application of a quality conditioner around the 60-day mark is sufficient, and even that is optional if the leather looks good and feels supple. More is not better. Over-conditioning saturates the leather, can cause uneven darkening, and interferes with the natural break-in process.</p>
+
+    <p>Do not store the bag compressed or in a tight space during this period. If you are not using it for a few days, stuff it loosely with tissue paper and set it on a shelf where it can breathe and hold its shape. A compressed bag during break-in can develop fold lines in places where you don&rsquo;t want them.</p>
+
+    <p>Do not stress about the first small scuff. On pebble grain leather in particular, surface scuffs often disappear entirely with a light buffing from a clean cloth, or fade to invisibility within a week of normal handling. The texture of pebble grain is self-concealing in a way that smooth grain leather is not. It is one of the reasons we use it.</p>
+
+    <h2>The 90-Day Mark</h2>
+
+    <p>By the end of three months, you have a bag that is yours in a way a new bag can never be. The break-in is not over &mdash; fine leather continues to develop and improve for years &mdash; but the most dramatic transformation has happened. What was structured and formal is now settled and personal. The stiffness is gone. What replaced it is not softness exactly, but ease: the feeling of a thing that knows how it works with you.</p>
+
+    <p>The best leather goods improve with time. The first 90 days are not a test of the product. They are the beginning of a relationship &mdash; one that, with any luck, will outlast the occasion you bought it for.</p>
+
+  </article>
+
+  <!-- Author Byline -->
+  <div class="post-byline" data-reveal>
+    <div>
+      <span class="post-byline__label">Written by</span>
+      <span class="post-byline__name">Michael Deschenes</span>
+    </div>
+  </div>
+
+  <!-- Continue Reading -->
+  <section class="continue-reading">
+    <p class="continue-reading__label">Continue Reading</p>
+    <div class="continue-reading__grid" data-reveal>
+
+      <article class="read-card">
+        <a href="journal-patina.html">
+          <div class="read-card__img">
+            <img
+              src="../outputs/lifestyle/IL_LIFESTYLE_01_morning-desk_20260614.png"
+              alt="Leather bag on morning desk"
+              loading="lazy"
+            />
+          </div>
+        </a>
+        <span class="read-card__category">Craft &amp; Care</span>
+        <h2 class="read-card__title"><a href="journal-patina.html">Patina: Why the Best Leather Goods Look Better Used Than New</a></h2>
+        <a href="journal-patina.html" class="post-link">Read &rarr;</a>
+      </article>
+
+      <article class="read-card">
+        <a href="journal-the-difference.html">
+          <div class="read-card__img">
+            <img
+              src="../outputs/studio/IL_STUDIO_02_profile-side_20260614.png"
+              alt="Leather bag profile showing grain quality"
+              loading="lazy"
+            />
+          </div>
+        </a>
+        <span class="read-card__category">Materials</span>
+        <h2 class="read-card__title"><a href="journal-the-difference.html">The Difference Between Full-Grain, Top-Grain, and Genuine Leather</a></h2>
+        <a href="journal-the-difference.html" class="post-link">Read &rarr;</a>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- Shop CTA -->
+  <section class="shop-cta" data-reveal>
+    <div class="shop-cta__inner">
+      <span class="eyebrow">The Collection</span>
+      <h2 class="shop-cta__title">Shop the Collection</h2>
+      <p class="shop-cta__sub">Full-grain Italian leather, made to order. Each bag is built after your order is placed.</p>
+      <a href="collection.html" class="btn btn--primary">View the Collection</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer__top">
+      <div>
+        <div class="footer__logo">Indigo <em>Leather</em></div>
+        <p class="footer__tagline">Designer-made leather handbags in small batches. Crafted to Order from the collection. Ready to Ship when available.</p>
+        <div class="footer__social">
+          <a href="#" aria-label="Instagram">Instagram</a>
+          <a href="#" aria-label="Pinterest">Pinterest</a>
+        </div>
+      </div>
+      <nav aria-label="Shop navigation">
+        <div class="footer__col-title">Shop</div>
+        <div class="footer__links">
+          <a href="collection.html">The Collection</a>
+          <a href="juniper.html">Juniper</a>
+          <a href="junie.html">Junie</a>
+          <a href="letter-wristlet.html">Letter Wristlet</a>
+          <a href="ready-to-ship.html">Ready to Ship</a>
+        </div>
+      </nav>
+      <nav aria-label="Studio navigation">
+        <div class="footer__col-title">Studio</div>
+        <div class="footer__links">
+          <a href="about.html">About the Designer</a>
+          <a href="events.html">Events &amp; Markets</a>
+          <a href="commissions.html">Commissions</a>
+          <a href="journal.html">Journal</a>
+        </div>
+      </nav>
+      <nav aria-label="Support navigation">
+        <div class="footer__col-title">Support</div>
+        <div class="footer__links">
+          <a href="#">Crafted-to-Order FAQ</a>
+          <a href="#">Shipping &amp; Returns</a>
+          <a href="#">Leather Care Guide</a>
+          <a href="#">Contact</a>
+          <a href="#">Atelier List</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer__bottom">
+      <p class="footer__copy">&copy; 2026 Indigo Leather. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    const hdr = document.getElementById('hdr');
+    window.addEventListener('scroll', () => hdr.classList.toggle('scrolled', window.scrollY > 10), { passive: true });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Indigo Leather — Storefront</title>
+<style>/* ════════════════════════════════════════════════════════════
+   INDIGO LEATHER — DESIGN SYSTEM
+   Global stylesheet entry point. Consumers link THIS file.
+   Imports only — every token & font-face lives downstream.
+   ════════════════════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────────────
+   FONTS — Indigo Leather
+
+   • alga (Adobe Typekit) — DISPLAY + HEADINGS serif.
+     Elegant, light, editorial. Weights: 200 / 300 / 400
+     (roman + italic). Kit: svg7cqm.
+   • Playfair Display (Google) — BODY / prose serif.
+   • Barlow Condensed (Google) — labels, nav, UI.
+   • Courier Prime  (Google)  — stamp / receipt accents.
+
+   alga is served from Adobe's CDN (domain-locked kit); the
+   other three families come from Google Fonts.
+   ───────────────────────────────────────────── */
+
+/* Display + heading serif — Adobe Typekit (alga) */
+/*
+ * The Typekit service used to deliver this font or fonts for use on websites
+ * is provided by Adobe and is subject to these Terms of Use
+ * http://www.adobe.com/products/eulas/tou_typekit. For font license
+ * information, see the list below.
+ *
+ * alga:
+ *   - http://typekit.com/eulas/00000000000000007756f688
+ *   - http://typekit.com/eulas/00000000000000007756f686
+ *   - http://typekit.com/eulas/00000000000000007756f683
+ *   - http://typekit.com/eulas/00000000000000007756f680
+ *   - http://typekit.com/eulas/00000000000000007756f687
+ *   - http://typekit.com/eulas/00000000000000007756f684
+ *
+ * © 2009-2026 Adobe Systems Incorporated. All Rights Reserved.
+ */
+/*{"last_published":"2026-06-26 17:16:03 UTC"}*/
+
+/**/
+
+
+@font-face {
+font-family:"alga";
+src:url("cac2e4f7-26a7-4fe8-9d0c-132b39714c00") format("woff2"),url("6be1ad88-f37b-40a6-aae9-9826a79c1938") format("woff"),url("42308f1f-cd25-46bc-91ac-646cc90f784b") format("opentype");
+font-display:auto;font-style:normal;font-weight:200;font-stretch:normal;
+}
+
+@font-face {
+font-family:"alga";
+src:url("35f3fa2a-d379-42f1-b5e0-11242543dcce") format("woff2"),url("416e5a3d-d9cb-48ea-bb73-8e4aedbf2a69") format("woff"),url("46e1a7d0-1df6-4303-a3f3-f076ae83dcfc") format("opentype");
+font-display:auto;font-style:italic;font-weight:200;font-stretch:normal;
+}
+
+@font-face {
+font-family:"alga";
+src:url("81ce98ec-2a14-4967-9f90-859c098f4102") format("woff2"),url("332194a4-6995-4335-8a2c-5f9008d51b6d") format("woff"),url("b0d59b53-228b-426b-ac28-9b7936a33cac") format("opentype");
+font-display:auto;font-style:normal;font-weight:300;font-stretch:normal;
+}
+
+@font-face {
+font-family:"alga";
+src:url("5d3fce2b-3a16-4838-8e50-9838db1df536") format("woff2"),url("9276e221-8324-4647-ac92-84f411778f6d") format("woff"),url("fb53fdd6-9545-4a04-885c-242f8942063a") format("opentype");
+font-display:auto;font-style:italic;font-weight:300;font-stretch:normal;
+}
+
+@font-face {
+font-family:"alga";
+src:url("2a54693b-f917-423e-9a35-2edce86b50a3") format("woff2"),url("1e68ce69-e217-43b7-b25a-5cff7b6d1ad1") format("woff"),url("94c9ac99-a555-4573-b893-bd18495d1e07") format("opentype");
+font-display:auto;font-style:normal;font-weight:400;font-stretch:normal;
+}
+
+@font-face {
+font-family:"alga";
+src:url("760ae001-e7a7-4555-af2d-8c3b67b2381f") format("woff2"),url("a4838b38-6e77-4c6e-8925-a62991ab971d") format("woff"),url("d941b7de-1004-49f9-91da-30d2fcc7dd6c") format("opentype");
+font-display:auto;font-style:italic;font-weight:400;font-stretch:normal;
+}
+
+.tk-alga { font-family: "alga",serif; }
+
+
+/* Body serif + UI + mono — Google Fonts */
+/* vietnamese */
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("dae934e9-7c3d-47d8-9739-7e32ba410a7d") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("4170a583-fcea-483f-92e8-294c6d376115") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("b4f6f478-afa1-4d00-899e-b3f233d1d7b1") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("f02c9ad9-761a-466c-8f23-cd9d9889d934") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("201d694a-35ac-4d11-a594-b42036e07f06") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("628b5da5-a20e-40c5-8732-769c29d12005") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("6e05a2d4-2042-4a05-8a71-44bf33c79068") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("270978ef-85d2-496f-b01e-7c066ac5ac20") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("6e2f65c9-f517-4aab-850d-e829562490b9") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("56775eb6-c144-4f15-8799-82392cc8b38f") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("82b6a636-aaf9-4feb-99ae-a1fd5314bc39") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("4d3b33b6-c5c4-4402-836b-5add7b15cc21") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Courier Prime';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("0c5e5a4d-3b67-4883-b571-e2b779c665ab") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Courier Prime';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("acdc86cb-ea17-4c70-b179-1463f2efd068") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Courier Prime';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("4e4f323d-d2c5-4f0c-a633-7fed05c2f055") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Courier Prime';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("dd724264-2394-4423-a5e5-59bb4d5f6684") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Courier Prime';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("38bf50df-3787-4ea9-83fb-2eb7b8bb2d01") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Courier Prime';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("cae74c97-b5d5-4155-bd09-4e73a8ea7b58") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url("67956f8f-8a20-42f8-b4f5-f81b66a53cb1") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url("d4e5965e-083f-4753-9d25-cb7269406037") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url("d2d1dc87-2610-4320-9661-7a432329de40") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url("2c7fb54c-b6a9-48c8-909a-7390452996bb") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url("988e2ceb-6f3d-4088-8e61-decdfd58687b") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url("6441e152-88d2-4e88-9d50-2cf2a220c867") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url("134de37c-4d7d-4113-be4c-baafa60194fc") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url("f8af639b-8842-410b-889c-235805c47029") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+
+/* ─────────────────────────────────────────────
+   COLOR TOKENS — Indigo Leather
+   Vintage glove-tanned palette in the spirit of
+   1980s–90s Coach Leatherware catalogs: aged ivory
+   catalog stock, rich full-grain leather tones, oxblood
+   and British tan, antique brass. Warm, deep, editorial.
+   ───────────────────────────────────────────── */
+
+:root {
+  /* ── Backgrounds — aged catalog stock ──── */
+  --bg:        #F4EBD9;   /* ivory catalog paper — default page */
+  --bg-warm:   #E7D9BF;   /* warm tan stock — alternating section */
+  --bg-cream:  #FAF4E7;   /* near-white inset card / panel */
+  --bg-dark:   #1A130B;   /* espresso black — hero / footer */
+
+  /* ── Glove-tanned leather palette ──────────
+     The 1984 Coach color card: full-grain hides. */
+  --british-tan: #B26B36;   /* PRIMARY ACCENT — iconic Coach tan */
+  --tan:         #B26B36;   /* alias of british-tan (legacy refs) */
+  --saddle:      #9A6230;   /* mid saddle brown */
+  --tabac:       #99662F;   /* tobacco */
+  --camel:       #C28E51;   /* light camel */
+  --putty:       #C3B190;   /* tan-grey */
+  --mocha:       #4A3526;   /* dark milk-coffee brown */
+  --chocolate:   #3A2413;   /* deep brown */
+  --mahogany:    #5A2A22;   /* oxblood-brown (Prairie Bag) */
+  --oxblood:     #4C1D1E;   /* deepest burgundy */
+  --burgundy:    #5E2122;   /* burgundy */
+  --coach-red:   #8C2C24;   /* brick red */
+  --sage:        #5C5C44;   /* muted olive */
+  --navy:        #21304B;   /* deep navy */
+  --brass:       #9C7A38;   /* antique brass hardware */
+  --brass-lt:    #C2A24E;   /* lit brass highlight */
+
+  /* ── Brand accents ────────────────────────
+     Oxblood + sage echo the vintage color card. */
+  --indigo:    #283B5A;   /* philosophy / quote sections (navy-indigo) */
+  --hunter:    #3A4A30;   /* Ready-to-Ship / availability (sage-hunter) */
+
+  /* ── Ink scale (text) ─────────────────────
+     Warm browns, never pure grey. */
+  --ink:       #1F160C;   /* primary text */
+  --ink-warm:  #3A2718;   /* warm heading */
+  --ink-mid:   #5F4630;   /* secondary text */
+  --ink-muted: #927C68;   /* tertiary / meta */
+  --ink-light: #BCA686;   /* placeholder / disabled */
+  --ink-inv:   #F4EBD9;   /* text on dark */
+
+  /* ── Rules / dividers — keyline ink ──────── */
+  --rule:      #B9A079;   /* standard hairline */
+  --rule-lt:   #D8C7A6;   /* light hairline */
+  --rule-dk:   #7E5E3E;   /* dark hairline (on warm bg) */
+  --keyline:   #2A1D10;   /* near-black editorial keyline border */
+
+  /* ── Product leather colorways ────────────
+     The 1984 Coach Glove-Tanned color card. */
+  --leather-british-tan: #B26B36;
+  --leather-saddle:      #9A6230;
+  --leather-tabac:       #99662F;
+  --leather-mahogany:    #5A2A22;
+  --leather-burgundy:    #5E2122;
+  --leather-mocha:       #4A3526;
+  --leather-sage:        #5C5C44;
+  --leather-navy:        #21304B;
+  --leather-putty:       #C3B190;
+  --leather-black:       #1A130B;
+
+  /* ── Semantic aliases ─────────────────────
+     Prefer these in product code. */
+  --surface-page:    var(--bg);
+  --surface-alt:     var(--bg-warm);
+  --surface-card:    var(--bg-cream);
+  --surface-dark:    var(--bg-dark);
+
+  --text-primary:    var(--ink);
+  --text-heading:    var(--ink-warm);
+  --text-secondary:  var(--ink-mid);
+  --text-muted:      var(--ink-muted);
+  --text-disabled:   var(--ink-light);
+  --text-inverse:    var(--ink-inv);
+
+  --accent:          var(--british-tan); /* primary brand accent */
+  --accent-deep:     var(--oxblood);
+  --border:          var(--rule);
+  --border-light:    var(--rule-lt);
+
+  --status-rts:      var(--hunter);    /* Ready to Ship */
+  --status-cto:      var(--ink);       /* Crafted to Order */
+}
+
+/* ─────────────────────────────────────────────
+   TYPOGRAPHY TOKENS — Indigo Leather
+   Four-font system:
+   • alga             → DISPLAY + HEADINGS (Typekit serif)
+   • Playfair Display → BODY / prose (serif)
+   • Barlow Condensed → labels, nav, UI (condensed)
+   • Courier Prime    → stamp / receipt accents (mono)
+   Editorial, magazine-luxury. Italic is a signature.
+
+   alga ships only THREE weights — 200 / 300 / 400 — which is
+   the whole point: thin, high-end serif headings. Per-role
+   weight assignments live in the WEIGHTS block below.
+   ───────────────────────────────────────────── */
+
+:root {
+  /* ── Families ─────────────────────────────── */
+  --f-display: 'alga', 'Playfair Display', Georgia, serif;          /* @kind font */
+  --f-body:    'Playfair Display', Georgia, 'Times New Roman', serif; /* @kind font */
+  --f-label:   'Barlow Condensed', 'Arial Narrow', sans-serif; /* @kind font */
+  --f-stamp:   'Courier Prime', 'Courier New', monospace; /* @kind font */
+
+  /* Semantic aliases */
+  --font-serif-display: var(--f-display); /* @kind font */
+  --font-serif-body:    var(--f-body); /* @kind font */
+  --font-ui-label:      var(--f-label); /* @kind font */
+  --font-mono-stamp:    var(--f-stamp); /* @kind font */
+
+  /* ── Weights ──────────────────────────────────
+     alga: 200 / 300 / 400 only.
+     Playfair (body): 400..900.
+     Barlow: 300 / 400 / 500 / 600. */
+  --fw-light:   300; /* @kind font */
+  --fw-regular: 400; /* @kind font */
+  --fw-medium:  500;   /* @kind font */
+  --fw-semibold:600; /* @kind font */
+
+  /* alga (display) per-role weights */
+  --fw-display-xl: 200;   /* @kind font */
+  --fw-display:    300;   /* @kind font */
+  --fw-heading:    400;   /* @kind font */
+
+  /* ── Type scale (fluid, clamp) ────────────── */
+  --t-display-xl: clamp(2.8rem, 6vw, 5.5rem);   /* @kind font */
+  --t-display-l:  clamp(2.2rem, 4vw, 3.6rem);   /* @kind font */
+  --t-heading:    clamp(1.6rem, 3vw, 2.6rem);   /* @kind font */
+  --t-subhead:    clamp(1.2rem, 2vw, 1.5rem);   /* @kind font */
+  --t-stat:       clamp(3rem, 7vw, 6.5rem);     /* @kind font */
+  --t-body-lg:    1.125rem; /* @kind font */
+  --t-body:       1rem; /* @kind font */
+  --t-body-sm:    0.9rem; /* @kind font */
+  --t-label:      0.75rem;   /* @kind font */
+  --t-label-sm:   0.625rem;  /* @kind font */
+  --t-stamp:      0.6875rem;  /* @kind font */
+
+  /* ── Line heights ─────────────────────────── */
+  --lh-tight:   1.02;   /* @kind font */
+  --lh-snug:    1.15;   /* @kind font */
+  --lh-heading: 1.2; /* @kind font */
+  --lh-body:    1.6; /* @kind font */
+  --lh-prose:   1.8;    /* @kind font */
+
+  /* ── Letter-spacing ───────────────────────── */
+  --ls-display:  0.02em; /* @kind font */
+  --ls-tight:    0; /* @kind font */
+  --ls-label:    0.16em;   /* @kind font */
+  --ls-wide:     0.22em;   /* @kind font */
+  --ls-wider:    0.28em;   /* @kind font */
+  --ls-widest:   0.32em;   /* @kind font */
+  --ls-stamp:    0.2em;    /* @kind font */
+
+  /* ── Semantic text styles (reference values) ─
+     primary display, body, label, stamp.
+     Apply family + size + weight together. */
+  --text-display:  var(--fw-display) var(--t-display-xl)/var(--lh-tight) var(--f-display); /* @kind font */
+  --text-heading-style: var(--fw-heading) var(--t-heading)/var(--lh-heading) var(--f-display); /* @kind font */
+  --text-body-style:    var(--fw-medium) var(--t-body)/var(--lh-prose) var(--f-body); /* @kind font */
+}
+
+/* ─────────────────────────────────────────────
+   SPACING, LAYOUT, RADIUS, SHADOW — Indigo Leather
+   Sharp, editorial geometry. Zero radius throughout.
+   "Seam" grids use a 2px gap so cards read like
+   stitched leather panels.
+   ───────────────────────────────────────────── */
+
+:root {
+  /* ── Spacing scale (4px base) ─────────────── */
+  --space-0:   0;
+  --space-1:   4px;
+  --space-2:   8px;
+  --space-3:   12px;
+  --space-4:   16px;
+  --space-5:   20px;
+  --space-6:   24px;
+  --space-8:   32px;
+  --space-10:  40px;
+  --space-12:  48px;
+  --space-16:  64px;
+  --space-18:  72px;
+  --space-20:  80px;
+  --space-30:  120px;
+
+  /* ── The "seam" gap ───────────────────────── */
+  --seam:      2px;   /* signature inter-card gutter */
+
+  /* ── Layout ───────────────────────────────── */
+  --container:     1440px;   /* max content width */
+  --container-doc: 1200px;   /* prose / docs width */
+  --gutter:        48px;     /* side padding (desktop) */
+  --gutter-sm:     24px;     /* side padding (mobile) */
+  --section-y:     72px;     /* vertical section rhythm */
+
+  /* ── Radius ───────────────────────────────────
+     ONE radius: zero. Sharp corners everywhere. */
+  --radius:    0px;
+  --radius-sm: 0px;
+  --radius-pill: 0px;
+
+  /* ── Borders ──────────────────────────────── */
+  --border-w:    1px;
+  --border-hair: 1px;
+
+  /* ── Shadows ──────────────────────────────────
+     Restrained. Leather-warm, low-spread, never blue.
+     Used sparingly — flat-with-hairline is the default. */
+  --shadow-none: none;
+  --shadow-sm:   0 1px 2px rgba(30, 18, 8, 0.06);
+  --shadow-card: 0 8px 24px rgba(30, 18, 8, 0.08);
+  --shadow-lift: 0 16px 48px rgba(30, 18, 8, 0.14);
+
+  /* ── Z-index ──────────────────────────────── */
+  --z-header:  100; /* @kind other */
+  --z-overlay: 500; /* @kind other */
+  --z-modal:   600; /* @kind other */
+  --z-toast:   700; /* @kind other */
+}
+
+/* ─────────────────────────────────────────────
+   MOTION TOKENS — Indigo Leather
+   Restrained animation. Opacity + transform only.
+   Nothing bounces. Everything decelerates into rest.
+   ───────────────────────────────────────────── */
+
+:root {
+  /* ── Easing ───────────────────────────────── */
+  --ease-out:     cubic-bezier(0, 0, 0.2, 1);              /* @kind other */
+  --ease-leather: cubic-bezier(0.25, 0.46, 0.45, 0.94);   /* @kind other */
+  --ease-in-out:  cubic-bezier(0.4, 0, 0.2, 1); /* @kind other */
+
+  /* ── Duration ─────────────────────────────── */
+  --dur-fast:   0.22s;   /* @kind other */
+  --dur-mid:    0.45s;   /* @kind other */
+  --dur-reveal: 0.7s;    /* @kind other */
+
+  /* ── Reveal delays (stagger) ──────────────── */
+  --delay-1: 0.1s; /* @kind other */
+  --delay-2: 0.2s; /* @kind other */
+  --delay-3: 0.3s; /* @kind other */
+
+  /* ── Composite transitions ────────────────── */
+  --transition-base:  all var(--dur-fast) var(--ease-out); /* @kind other */
+  --transition-organic: all var(--dur-mid) var(--ease-leather); /* @kind other */
+
+  /* ── Press / active ───────────────────────── */
+  --press-scale: 0.97; /* @kind other */
+}
+
+</style>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--ink); -webkit-font-smoothing: antialiased; }
+  button { font: inherit; }
+</style>
+</head>
+<body>
+  <div id="root"></div>
+
+  
+
+  <script src="e5ddc4f7-0550-497f-980e-3f8cb654e03b" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="b94e7765-430a-4e2e-88be-a49321b806a9" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="ce0428fa-cf6f-4b7a-ab2c-255f8096e004" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <script src="e7e5d749-4d7f-45b7-a5d7-5114bc58f211"></script>
+
+  <script type="text/babel" src="af9d27e9-f05a-4cb2-a680-cfb11e720f70"></script>
+  <script type="text/babel" src="763ef3ba-a4f9-436f-b738-47c9c5392897"></script>
+  <script type="text/babel" src="5e3e3479-a2d7-45d4-995a-b3623deae0b0"></script>
+  <script type="text/babel" src="44514873-4696-43e0-8648-b61453e82855"></script>
+  <script type="text/babel" src="a220267f-acda-416f-a7e1-6b061228ab0f"></script>
+  <script type="text/babel" src="bcfce6db-3c05-4137-9420-cf0d42d89810"></script>
+  <script type="text/babel" src="58e35bb9-6a40-4c87-90cb-e92fb4ee8b74"></script>
+  <script type="text/babel" src="ca1e857a-3756-4a97-916e-d9902458d3cd"></script>
+  <script type="text/babel" src="52d2a7ee-5667-4630-820a-1e3e77809407"></script>
+
+  <script type="text/babel">
+    function App() {
+      const [route, setRoute] = React.useState({ name: 'home' });
+      const [cart, setCart] = React.useState([]);
+
+      const navigate = (name, extra = {}) => { setRoute({ name, ...extra }); window.scrollTo(0, 0); };
+      const openProduct = (productId) => navigate('product', { productId });
+      const addToCart = (item) => setCart((c) => [...c, item]);
+      const removeFromCart = (i) => setCart((c) => c.filter((_, idx) => idx !== i));
+
+      let screen;
+      switch (route.name) {
+        case 'collection': screen = <window.ILCollection key={route.filter || 'all'} filter={route.filter} onOpenProduct={openProduct} />; break;
+        case 'product':    screen = <window.ILProductDetail productId={route.productId} onAddToCart={addToCart} onNavigate={navigate} />; break;
+        case 'cart':       screen = <window.ILCart items={cart} onNavigate={navigate} onRemove={removeFromCart} />; break;
+        case 'about':      screen = <window.ILAbout onNavigate={navigate} />; break;
+        case 'events':     screen = <window.ILEvents />; break;
+        default:           screen = <window.ILHome onNavigate={navigate} onOpenProduct={openProduct} />;
+      }
+
+      return (
+        <div>
+          <window.ILHeader route={route} onNavigate={navigate} cartCount={cart.length} />
+          {screen}
+          <window.ILFooter onNavigate={navigate} />
+        </div>
+      );
+    }
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+
+
+</body></html>

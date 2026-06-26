@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Collection — Indigo Leather</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Barlow+Condensed:wght@300;400;500;600&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ═══════════════════════════════════════════════
+       TOKEN MAP
+       ═══════════════════════════════════════════════ */
+    :root {
+      --bg:            #F7F2EA;
+      --bg-warm:       #EDE5D8;
+      --bg-cream:      #FAF8F4;
+      --bg-dark:       #1E1208;
+      --chocolate:     #3D2010;
+      --tan:           #B8824A;
+      --saddle:        #8B5A2B;
+      --camel:         #C4975A;
+      --indigo:        #2B3A5C;
+      --hunter:        #2D4A35;
+      --brass:         #B8922A;
+      --ink:           #1E1208;
+      --ink-warm:      #3D2A1A;
+      --ink-mid:       #6B4E34;
+      --ink-muted:     #9E8878;
+      --ink-light:     #C4B09A;
+      --ink-inv:       #F7F2EA;
+      --rule:          #C9B49A;
+      --rule-lt:       #E2D5C0;
+      --rule-dk:       #8B6A4A;
+      --f-display: 'Playfair Display', Georgia, serif;
+      --f-label:   'Barlow Condensed', 'Arial Narrow', sans-serif;
+      --f-stamp:   'Courier Prime', 'Courier New', monospace;
+      --ease-out: cubic-bezier(0, 0, 0.2, 1);
+      --ease-leather: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    /* ═══════════════════════════════════════════════
+       RESET
+       ═══════════════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 19px; scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--ink); font-family: var(--f-display); -webkit-font-smoothing: antialiased; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; background: none; border: none; font: inherit; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+
+    /* ═══════════════════════════════════════════════
+       ANNOUNCEMENT BAR
+       ═══════════════════════════════════════════════ */
+    .ann {
+      background: var(--chocolate);
+      color: var(--ink-inv);
+      text-align: center;
+      padding: 9px 24px;
+      font-family: var(--f-label);
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
+    /* ═══════════════════════════════════════════════
+       HEADER
+       ═══════════════════════════════════════════════ */
+    .hdr {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: var(--bg);
+      border-bottom: 1px solid var(--rule-lt);
+      transition: box-shadow 0.25s;
+    }
+    .hdr.scrolled { box-shadow: 0 2px 20px rgba(30,18,8,0.07); }
+    .hdr__inner {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 32px;
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+    .hdr__nav { display: flex; gap: 28px; }
+    .hdr__nav a {
+      font-family: var(--f-label);
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-mid);
+      transition: color 0.2s;
+      white-space: nowrap;
+    }
+    .hdr__nav a:hover, .hdr__nav a.active { color: var(--tan); }
+    .hdr__logo {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--f-display);
+      font-size: 20px;
+      font-weight: 500;
+      font-style: italic;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .hdr__logo em { font-style: italic; color: var(--tan); }
+    .hdr__actions {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 18px;
+    }
+    .hdr__icon {
+      font-family: var(--f-label);
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-mid);
+      cursor: pointer;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      transition: color 0.2s;
+    }
+    .hdr__icon:hover { color: var(--tan); }
+    .cart-pip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 15px;
+      height: 15px;
+      background: var(--tan);
+      color: #fff;
+      border-radius: 50%;
+      font-size: 17px;
+      margin-left: 4px;
+    }
+
+    /* ═══════════════════════════════════════════════
+       PAGE HERO — TYPOGRAPHIC
+       ═══════════════════════════════════════════════ */
+    .page-hero {
+      background: var(--bg-warm);
+      padding: 64px 48px 56px;
+      border-bottom: 1px solid var(--rule-lt);
+    }
+    .page-hero__inner {
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+    .page-hero__eyebrow {
+      font-family: var(--f-label);
+      font-size: 11px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--tan);
+      display: block;
+      margin-bottom: 16px;
+    }
+    .page-hero__h1 {
+      font-family: var(--f-display);
+      font-size: clamp(2.8rem, 5vw, 5rem);
+      font-weight: 500;
+      line-height: 1.02;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin-bottom: 20px;
+      max-width: 18ch;
+    }
+    .page-hero__sub {
+      font-family: var(--f-display);
+      font-size: 1rem;
+      font-style: italic;
+      font-weight: 500;
+      color: var(--ink-mid);
+      line-height: 1.8;
+      max-width: 54ch;
+      margin-bottom: 28px;
+    }
+    .page-hero__pills {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      font-family: var(--f-label);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      padding: 7px 14px;
+      border: 1px solid var(--rule);
+      color: var(--ink-mid);
+      transition: border-color 0.2s, color 0.2s;
+      white-space: nowrap;
+    }
+    .pill:hover { border-color: var(--ink-mid); color: var(--ink); }
+    .pill--rts {
+      background: var(--hunter);
+      color: var(--ink-inv);
+      border-color: var(--hunter);
+    }
+    .pill--rts:hover { background: #1e3526; border-color: #1e3526; color: var(--ink-inv); }
+
+    /* ═══════════════════════════════════════════════
+       FILTER BAR — STICKY
+       ═══════════════════════════════════════════════ */
+    .filter-bar {
+      position: sticky;
+      top: 73px; /* below sticky header */
+      z-index: 100;
+      background: var(--bg);
+      border-bottom: 1px solid var(--rule-lt);
+    }
+    .filter-bar__inner {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      padding: 0 48px;
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+    .filter-tab {
+      font-family: var(--f-label);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      padding: 14px 18px;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+      white-space: nowrap;
+    }
+    .filter-tab:hover { color: var(--ink); }
+    .filter-tab.active {
+      color: var(--ink);
+      border-bottom-color: var(--ink);
+    }
+    .filter-bar__count {
+      margin-left: auto;
+      font-family: var(--f-label);
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+    }
+
+    /* ═══════════════════════════════════════════════
+       BUTTONS
+       ═══════════════════════════════════════════════ */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 12px 28px;
+      font-family: var(--f-label);
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      transition: all 0.22s var(--ease-out);
+      white-space: nowrap;
+    }
+    .btn:active { transform: scale(0.97); }
+    .btn--primary { background: var(--ink); color: var(--ink-inv); border: 1px solid var(--ink); }
+    .btn--primary:hover { background: var(--chocolate); border-color: var(--chocolate); }
+    .btn--ghost { background: transparent; color: var(--ink); border: 1px solid var(--rule); }
+    .btn--ghost:hover { border-color: var(--ink); }
+    .btn--ghost-inv { background: transparent; color: var(--ink-inv); border: 1px solid rgba(247,242,234,0.35); }
+    .btn--ghost-inv:hover { background: var(--ink-inv); color: var(--ink); border-color: var(--ink-inv); }
+
+    /* ═══════════════════════════════════════════════
+       BADGES
+       ═══════════════════════════════════════════════ */
+    .badge {
+      display: inline-block;
+      font-family: var(--f-label);
+      font-size: 10px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      padding: 5px 10px;
+    }
+    .badge--cto { background: var(--ink); color: var(--ink-inv); }
+    .badge--rts { background: var(--hunter); color: var(--ink-inv); }
+
+    /* ═══════════════════════════════════════════════
+       PRODUCT GRID — 3 COLUMN
+       ═══════════════════════════════════════════════ */
+    .grid-section {
+      padding: 40px 48px 80px;
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+    .prod-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+    .prod {
+      position: relative;
+      cursor: pointer;
+      background: var(--bg-warm);
+    }
+    .prod__img-wrap {
+      position: relative;
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      background: var(--bg-warm);
+    }
+    .prod__img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: opacity 0.5s var(--ease-out), transform 0.65s var(--ease-leather);
+    }
+    .prod__img--alt { opacity: 0; }
+    .prod:hover .prod__img--main { opacity: 0; transform: scale(1.04); }
+    .prod:hover .prod__img--alt  { opacity: 1; transform: scale(1.04); }
+
+    .prod__badge-wrap {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      z-index: 1;
+    }
+    .prod__atc {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(30,18,8,0.9);
+      color: var(--ink-inv);
+      font-family: var(--f-label);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      padding: 14px;
+      text-align: center;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      min-height: 44px;
+      transform: translateY(100%);
+      transition: transform 0.28s var(--ease-out), background 0.2s;
+      z-index: 2;
+    }
+    .prod:hover .prod__atc { transform: translateY(0); }
+    .prod__atc:hover { background: var(--tan); }
+
+    .prod__info {
+      background: var(--bg);
+      padding: 14px 16px 18px;
+      border-top: 1px solid var(--rule-lt);
+    }
+    .prod__cat {
+      font-family: var(--f-label);
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 5px;
+    }
+    .prod__name {
+      font-family: var(--f-display);
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+    .prod__foot {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .prod__price {
+      font-family: var(--f-display);
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--ink);
+    }
+    .prod__lead {
+      font-family: var(--f-label);
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+    }
+    .prod__lead--rts {
+      color: var(--hunter);
+      font-weight: 500;
+    }
+
+    /* ═══════════════════════════════════════════════
+       CRAFTED TO ORDER EXPLAINER STRIP
+       ═══════════════════════════════════════════════ */
+    .cto-strip {
+      background: var(--indigo);
+      color: var(--ink-inv);
+      padding: 56px 48px;
+    }
+    .cto-strip__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+    .cto-strip__heading {
+      font-family: var(--f-display);
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      font-weight: 500;
+      color: var(--ink-inv);
+      margin-bottom: 16px;
+      line-height: 1.15;
+    }
+    .cto-strip__body {
+      font-family: var(--f-display);
+      font-size: 0.95rem;
+      font-style: italic;
+      font-weight: 500;
+      color: rgba(247,242,234,0.55);
+      line-height: 1.85;
+    }
+    .cto-strip__timeline {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      border-left: 1px solid rgba(247,242,234,0.15);
+      padding-left: 40px;
+    }
+    .cto-step {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .cto-step__num {
+      font-family: var(--f-stamp);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      color: var(--tan);
+      text-transform: uppercase;
+    }
+    .cto-step__label {
+      font-family: var(--f-label);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(247,242,234,0.7);
+      white-space: nowrap;
+    }
+    .cto-arrow {
+      font-family: var(--f-label);
+      font-size: 14px;
+      color: rgba(247,242,234,0.2);
+      padding: 0 16px;
+      flex-shrink: 0;
+    }
+
+    /* ═══════════════════════════════════════════════
+       SCROLL REVEAL
+       ═══════════════════════════════════════════════ */
+    [data-reveal] {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+    }
+    [data-reveal].visible { opacity: 1; transform: none; }
+    [data-reveal][data-d="1"] { transition-delay: 0.1s; }
+    [data-reveal][data-d="2"] { transition-delay: 0.2s; }
+    [data-reveal][data-d="3"] { transition-delay: 0.3s; }
+    [data-reveal][data-d="4"] { transition-delay: 0.4s; }
+    [data-reveal][data-d="5"] { transition-delay: 0.5s; }
+    [data-reveal][data-d="6"] { transition-delay: 0.6s; }
+
+    /* ═══════════════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════════════ */
+    .footer { background: var(--bg-dark); color: var(--ink-inv); padding: 64px 48px 40px; }
+    .footer__top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 56px;
+      border-bottom: 1px solid rgba(247,242,234,0.08);
+      margin-bottom: 32px;
+      max-width: 1440px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .footer__logo { font-family: var(--f-display); font-size: 1.4rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 16px; }
+    .footer__logo em { font-style: italic; color: var(--tan); }
+    .footer__tagline { font-family: var(--f-display); font-size: 0.9rem; font-style: italic; font-weight: 500; color: rgba(247,242,234,0.38); line-height: 1.85; max-width: 28ch; margin-bottom: 28px; }
+    .footer__social { display: flex; gap: 20px; }
+    .footer__social a { font-family: var(--f-label); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(247,242,234,0.28); border-bottom: 1px solid rgba(247,242,234,0.1); padding-bottom: 1px; transition: color 0.2s; }
+    .footer__social a:hover { color: var(--tan); }
+    .footer__col-title { font-family: var(--f-label); font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(247,242,234,0.28); margin-bottom: 20px; }
+    .footer__links { display: flex; flex-direction: column; gap: 12px; }
+    .footer__links a { font-family: var(--f-display); font-size: 0.9rem; font-weight: 500; color: rgba(247,242,234,0.55); transition: color 0.2s; }
+    .footer__links a:hover { color: var(--ink-inv); }
+    .footer__bottom { display: flex; justify-content: space-between; align-items: center; max-width: 1440px; margin: 0 auto; }
+    .footer__copy { font-family: var(--f-label); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(247,242,234,0.18); }
+  </style>
+</head>
+<body>
+
+  <!-- ANNOUNCEMENT BAR -->
+  <div class="ann" role="status">Each piece is made by hand after your order is placed &middot; 4&ndash;5 week lead time</div>
+
+  <!-- HEADER -->
+  <header class="hdr" id="hdr">
+    <div class="hdr__inner">
+      <nav class="hdr__nav" aria-label="Main navigation">
+        <a href="collection.html" class="active" aria-current="page">Collection</a>
+        <a href="ready-to-ship.html">Ready to Ship</a>
+        <a href="events.html">Events</a>
+        <a href="about.html">About</a>
+        <a href="commissions.html">Commissions</a>
+      </nav>
+      <a href="index.html" class="hdr__logo" aria-label="Indigo Leather &mdash; Home">Indigo <em>Leather</em></a>
+      <div class="hdr__actions">
+        <a href="#" class="hdr__icon" aria-label="Search">Search</a>
+        <a href="#" class="hdr__icon" aria-label="Account">Account</a>
+        <a href="cart.html" class="hdr__icon" aria-label="Bag, 0 items">Bag <span class="cart-pip" aria-hidden="true">0</span></a>
+      </div>
+    </div>
+  </header>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero" aria-labelledby="page-heading">
+    <div class="page-hero__inner">
+      <span class="page-hero__eyebrow">The Collection</span>
+      <h1 class="page-hero__h1" id="page-heading">Each piece made for you.</h1>
+      <p class="page-hero__sub">Crafted to Order in Italian leather. Choose your color, hardware, and strap configuration. Your bag is made after your order is placed.</p>
+      <div class="page-hero__pills" role="list" aria-label="Shopping options">
+        <span class="pill" role="listitem">Crafted to Order &middot; 4&ndash;5 weeks</span>
+        <a href="ready-to-ship.html" class="pill pill--rts" role="listitem" aria-label="Ready to Ship — Ships now">Ready to Ship &middot; Ships now &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FILTER BAR -->
+  <nav class="filter-bar" aria-label="Filter collection">
+    <div class="filter-bar__inner">
+      <button class="filter-tab active" aria-pressed="true" data-filter="all">All</button>
+      <button class="filter-tab" aria-pressed="false" data-filter="bags">Bags</button>
+      <button class="filter-tab" aria-pressed="false" data-filter="wristlets">Wristlets</button>
+      <a href="ready-to-ship.html" class="filter-tab">Ready to Ship</a>
+      <span class="filter-bar__count" aria-live="polite" id="filter-count">8 pieces</span>
+    </div>
+  </nav>
+
+  <!-- PRODUCT GRID -->
+  <main id="main-content">
+    <div class="grid-section">
+      <ul class="prod-grid" role="list" aria-label="Collection products">
+
+        <!-- Card 1: Juniper Black -->
+        <li class="prod" role="listitem" data-category="bags" data-reveal data-d="1">
+          <a href="juniper.html" aria-label="Juniper in Black, Crafted to Order, $280">
+            <div class="prod__img-wrap">
+              <div class="prod__badge-wrap">
+                <span class="badge badge--cto">Crafted to Order</span>
+              </div>
+              <img class="prod__img prod__img--main"
+                src="../outputs/studio/IL_STUDIO_01_hero-three-quarter_20260614.png"
+                alt="Juniper bag in Black leather, three-quarter view"
+                loading="eager" />
+              <img class="prod__img prod__img--alt"
+                src="../outputs/lifestyle/IL_LIFESTYLE_01_morning-desk_20260614.png"
+                alt="Juniper bag in Black leather, lifestyle"
+                loading="lazy" />
+              <button class="prod__atc" aria-label="Add Juniper Black to bag" tabindex="-1">Add to Bag</button>
+            </div>
+          </a>
+          <div class="prod__info">
+            <div class="prod__cat">Bag &middot; 9&times;13&quot;</div>
+            <div class="prod__name">Juniper &middot; Black</div>
+            <div class="prod__foot">
+              <span class="prod__price">$280</span>
+              <span class="prod__lead">4&ndash;5 weeks</span>
+            </div>
+          </div>
+        </li>
+
+        <!-- Card 2: Juniper Espresso -->
+        <li class="prod" role="listitem" data-category="bags" data-reveal data-d="2">
+          <a href="juniper.html" aria-label="Juniper in Espresso, Crafted to Order, $280">
+            <div class="prod__img-wrap">
+              <div class="prod__badge-wrap">
+                <span class="badge badge--cto">Crafted to Order</span>
+              </div>
+              <img class="prod__img prod__img--main"
+                src="../outputs/lifestyle/IL_LIFESTYLE_02_cafe-window_20260614.png"
+                alt="Juniper bag in Espresso leather at a cafe window"
+                loading="lazy" />
+              <img class="prod__img prod__img--alt"
+                src="../outputs/studio/IL_STUDIO_02_profile-side_20260614.png"
+                alt="Juniper bag in Espresso leather, side profile"
+                loading="lazy" />
+              <button class="prod__atc" aria-label="Add Juniper Espresso to bag" tabindex="-1">Add to Bag</button>
+            </div>
+          </a>
+          <div class="prod__info">
+            <div class="prod__cat">Bag &middot; 9&times;13&quot;</div>
+            <div class="prod__name">Juniper &middot; Espresso</div>
+            <div class="prod__foot">
+              <span class="prod__price">$280</span>
+              <span class="prod__lead">4&ndash;5 weeks</span>
+            </div>
+          </div>
+        </li>
+
+        <!-- Card 3: Juniper Saddle -->
+        <li class="prod" role="listitem" data-category="bags" data-reveal data-d="3">
+          <a href="juniper.html" aria-label="Juniper in Saddle, Crafted to Order, $280">
+            <div class="prod__img-wrap">
+              <div class="prod__badge-wrap">
+                <span class="badge badge--cto">Crafted to Order</span>
+              </div>
+              <img class="prod__img prod__img--main"
+                src="../outputs/lifestyle/IL_LIFESTYLE_03_bookshop_20260614.png"
+                alt="Juniper bag in Saddle leather in a bookshop"
+                loading="lazy" />
+              <img class="prod__img prod__img--alt"
+                src="../outputs/studio/IL_STUDIO_03_flatlay-overhead_20260614.png"
+                alt="Juniper bag in Saddle leather, flatlay overhead"
+                loading="lazy" />
+              <button class="prod__atc" aria-label="Add Juniper Saddle to bag" tabindex="-1">Add to Bag</button>
+            </div>
+          </a>
+          <div class="prod__info">
+            <div class="prod__cat">Bag &middot; 9&times;13&quot;</div>
+            <div class="prod__name">Juniper &middot; Saddle</div>
+            <div class="prod__foot">
+              <span class="prod__price">$280</span>
+              <span class="prod__lead">4&ndash;5 weeks</span>
+            </div>
+          </div>
+        </li>
+
+        <!-- Card 4: Juniper Harbor -->
+        <li class="prod" role="listitem" data-category="bags" data-reveal data-d="1">
+          <a href="juniper.html" aria-label="Juniper in Harbor, Crafted to Order, $280">
+            <div class="prod__img-wrap">
+              <div class="prod__badge-wrap">
+                <span class="badge badge--cto">Crafted to Order</span>
+              </div>
+              <img class="prod__img prod__img--main"
+                src="../outputs/lifestyle/IL_LIFESTYLE_04_autumn-steps_20260614.png"
+                alt="Juniper bag in Harbor leather on autumn steps"
+                loading="lazy" />
+              <img class="prod__img prod__img--alt"
+                src="../outputs/studio/IL_STUDIO_01_hero-three-quarter_20260614.png"
+                alt="Juniper bag in Harbor leather, studio view"
+                loading="lazy" />
+              <button class="prod__atc" aria-label="Add Juniper Harbor to bag" tabindex="-1">Add to Bag</button>
+            </div>
+          </a>
+          <div class="prod__info">
+            <div class="prod__cat">Bag &middot; 9&times;13&quot;</div>
+            <div class="prod__name">Juniper &middot; Harbor</div>
+            <div class="prod__foot">
+              <span class="prod__price">$280</span>
+              <span class="prod__lead">4&ndash;5 weeks</span>
+            </div>
+          </div>
+        </li>
+
+        <!-- Card 5: Junie Black -->
+        <li class="prod" role="listitem" data-category="bags" data-reveal data-d="2">
+          <a href="junie.html" aria-label="Junie in Black, Crafted to Order, $225">
+            <div class="prod__img-wrap">
+              <div class="prod__badge-wrap">
+                <span class="badge badge--cto">Crafted to Order</span>
+              </div>
+              <img class="prod__img prod__img--main"
+                src="../outputs/studio/IL_STUDIO_02_profile-side_20260614.png"
+                alt="Junie bag in Black leather, side profile"
+                loading="lazy" />
+              <img class="prod__img prod__img--alt"
+                src="../outputs/lifestyle/IL_LIFESTYLE_01_morning-desk_20260614.png"
+                alt="Junie bag in Black leather, morning desk"
+                loading="lazy" />
+              <button class="prod__atc" aria-label="Add Junie Black to bag" tabindex="-1">Add to Bag</button>
+            </div>
+          </a>
+          <div class="prod__info">
+            <div class="prod__cat">Bag &middot; 7&times;11&quot;</div>
+            <div class="prod__name">Junie &middot; Black</div>
+            <div class="prod__foot">
+              <span class="prod__price">$225</span>
+              <span class="prod__lead">4&ndash;5 weeks</span>
+            </div>
+          </div>
+        </li>
+
+        <!-- Card 6: Junie Espresso -->
+        <li class="prod" role="listitem" data-category="bags" data-reveal data-d="3">
+          <a href="junie.html" aria-label="Junie in Espresso, Crafted to Order, $225">
+            <div class="prod__img-wrap">
+              <div class="prod__badge-wrap">
+                <span class="badge badge--cto">Crafted to Order</span>
+              </div>
+              <img class="prod__img prod__img--main"
+                src="../outputs/studio/IL_STUDIO_03_flatlay-overhead_20260614.png"
+                alt="Junie bag in Espresso leather, flatlay overhead"
+                loading="lazy" />
+              <img class="prod__img prod__img--alt"
+                src="../outputs/lifestyle/IL_LIFESTYLE_02_cafe-window_20260614.png"
+                alt="Junie bag in Espresso leather, cafe window"
+                loading="lazy" />
+              <button class="prod__atc" aria-label="Add Junie Espresso to bag" tabindex="-1">Add to Bag</button>
+            </div>
+          </a>
+          <div class="prod__info">
+            <div class="prod__cat">Bag &middot; 7&times;11&quot;</div>
+            <div class="prod__name">Junie &middot; Espresso</div>
+            <div class="prod__foot">
+              <span class="prod__price">$225</span>
+              <span class="prod__lead">4&ndash;5 weeks</span>
+            </div>
+          </div>
+        </li>
+
+        <!-- Card 7: Letter Wristlet Black -->
+        <li class="prod" role="listitem" data-category="wristlets" data-reveal data-d="1">
+          <a href="letter-wristlet.html" aria-label="Letter Wristlet in Black, Crafted to Order, $95">
+            <div class="prod__img-wrap">
+              <div class="prod__badge-wrap">
+                <span class="badge badge--cto">Crafted to Order</span>
+              </div>
+              <img class="prod__img prod__img--main"
+                src="../outputs/lifestyle/IL_LIFESTYLE_03_bookshop_20260614.png"
+                alt="Letter Wristlet in Black leather, bookshop"
+                loading="lazy" />
+              <img class="prod__img prod__img--alt"
+                src="../outputs/studio/IL_STUDIO_03_flatlay-overhead_20260614.png"
+                alt="Letter Wristlet in Black leather, overhead view"
+                loading="lazy" />
+              <button class="prod__atc" aria-label="Add Letter Wristlet Black to bag" tabindex="-1">Add to Bag</button>
+            </div>
+          </a>
+          <div class="prod__info">
+            <div class="prod__cat">Wristlet &middot; 6&times;9&quot;</div>
+            <div class="prod__name">Letter Wristlet &middot; Black</div>
+            <div class="prod__foot">
+              <span class="prod__price">$95</span>
+              <span class="prod__lead">4&ndash;5 weeks</span>
+            </div>
+          </div>
+        </li>
+
+        <!-- Card 8: Juniper Harbor — READY TO SHIP -->
+        <li class="prod" role="listitem" data-category="rts" data-reveal data-d="2">
+          <a href="ready-to-ship.html" aria-label="Juniper in Harbor, Ready to Ship, $280">
+            <div class="prod__img-wrap">
+              <div class="prod__badge-wrap">
+                <span class="badge badge--rts">Ready to Ship</span>
+              </div>
+              <img class="prod__img prod__img--main"
+                src="../outputs/studio/IL_STUDIO_01_hero-three-quarter_20260614.png"
+                alt="Juniper bag in Harbor leather, ready to ship"
+                loading="lazy" />
+              <img class="prod__img prod__img--alt"
+                src="../outputs/lifestyle/IL_LIFESTYLE_04_autumn-steps_20260614.png"
+                alt="Juniper bag in Harbor leather, lifestyle"
+                loading="lazy" />
+              <button class="prod__atc" aria-label="Add Juniper Harbor Ready to Ship to bag" tabindex="-1">Add to Bag</button>
+            </div>
+          </a>
+          <div class="prod__info">
+            <div class="prod__cat">Bag &middot; 9&times;13&quot;</div>
+            <div class="prod__name">Juniper &middot; Harbor</div>
+            <div class="prod__foot">
+              <span class="prod__price">$280</span>
+              <span class="prod__lead prod__lead--rts">Ships in 2&ndash;3 days</span>
+            </div>
+          </div>
+        </li>
+
+      </ul>
+    </div>
+  </main>
+
+  <!-- CRAFTED TO ORDER EXPLAINER STRIP -->
+  <section class="cto-strip" aria-labelledby="cto-heading">
+    <div class="cto-strip__inner">
+      <div data-reveal>
+        <h2 class="cto-strip__heading" id="cto-heading">What does Crafted to Order mean?</h2>
+        <p class="cto-strip__body">Every piece in the collection is made after your order is placed. You choose the leather, hardware, and strap configuration from a set of Indigo-approved options. Your bag is then cut, assembled, and hand-stitched specifically for you &mdash; not pulled from a shelf.</p>
+      </div>
+      <div class="cto-strip__timeline" aria-label="Order timeline" data-reveal data-d="2">
+        <div class="cto-step">
+          <span class="cto-step__num">1</span>
+          <span class="cto-step__label">Order placed</span>
+        </div>
+        <span class="cto-arrow" aria-hidden="true">&rarr;</span>
+        <div class="cto-step">
+          <span class="cto-step__num">2</span>
+          <span class="cto-step__label">Your piece is made</span>
+        </div>
+        <span class="cto-arrow" aria-hidden="true">&rarr;</span>
+        <div class="cto-step">
+          <span class="cto-step__num">3</span>
+          <span class="cto-step__label">Ships in 4&ndash;5 weeks</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer__top">
+      <div>
+        <div class="footer__logo">Indigo <em>Leather</em></div>
+        <p class="footer__tagline">Designer-made leather handbags in small batches. Crafted to Order from the collection. Ready to Ship when available.</p>
+        <div class="footer__social">
+          <a href="#" aria-label="Instagram">Instagram</a>
+          <a href="#" aria-label="Pinterest">Pinterest</a>
+        </div>
+      </div>
+      <nav aria-label="Shop navigation">
+        <div class="footer__col-title">Shop</div>
+        <div class="footer__links">
+          <a href="collection.html">The Collection</a>
+          <a href="juniper.html">Juniper</a>
+          <a href="junie.html">Junie</a>
+          <a href="letter-wristlet.html">Letter Wristlet</a>
+          <a href="ready-to-ship.html">Ready to Ship</a>
+        </div>
+      </nav>
+      <nav aria-label="Studio navigation">
+        <div class="footer__col-title">Studio</div>
+        <div class="footer__links">
+          <a href="about.html">About the Designer</a>
+          <a href="events.html">Events &amp; Markets</a>
+          <a href="commissions.html">Commissions</a>
+          <a href="journal.html">Journal</a>
+        </div>
+      </nav>
+      <nav aria-label="Support navigation">
+        <div class="footer__col-title">Support</div>
+        <div class="footer__links">
+          <a href="#">Crafted-to-Order FAQ</a>
+          <a href="#">Shipping &amp; Returns</a>
+          <a href="#">Leather Care Guide</a>
+          <a href="#">Contact</a>
+          <a href="#">Atelier List</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer__bottom">
+      <p class="footer__copy">&copy; 2026 Indigo Leather. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    /* Sticky header shadow */
+    const hdr = document.getElementById('hdr');
+    window.addEventListener('scroll', () => hdr.classList.toggle('scrolled', window.scrollY > 10), { passive: true });
+
+    /* Scroll reveal */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
+
+    /* Filter tabs — visual only, all items shown */
+    const tabs = document.querySelectorAll('.filter-tab[data-filter]');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', function() {
+        tabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-pressed', 'false'); });
+        this.classList.add('active');
+        this.setAttribute('aria-pressed', 'true');
+      });
+    });
+
+    /* Preload alt images on mouseenter */
+    document.querySelectorAll('.prod').forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        card.querySelectorAll('.prod__img--alt').forEach(img => {
+          if (!img.dataset.loaded) { img.dataset.loaded = '1'; }
+        });
+      }, { once: true });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Indigo Leather — Designed. Refined. Beautiful.</title>
+  <meta name="description" content="European-silhouette leather handbags in full-grain glove-tanned cowhide. Crafted to Order, made entirely by one maker in the USA. Est. 2014." />
+
+  <!-- alga (display serif) — Adobe Fonts kit svg7cqm. Domain-locked: add localhost + the live domain in Adobe Fonts → falls back to Playfair otherwise. -->
+  <link rel="stylesheet" href="https://use.typekit.net/svg7cqm.css" />
+  <!-- Body serif + UI + stamp — Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Barlow+Condensed:wght@300;400;500;600&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ════════════════════════════════════════════════════════
+       INDIGO LEATHER — OFFICIAL DESIGN SYSTEM (tokens)
+       1980s–90s Coach glove-tanned catalog. Aged ivory stock,
+       full-grain leather tones, oxblood + sage, antique brass.
+       ════════════════════════════════════════════════════════ */
+    :root {
+      /* Backgrounds — aged catalog stock */
+      --bg:        #F4EBD9;
+      --bg-warm:   #E7D9BF;
+      --bg-cream:  #FAF4E7;
+      --bg-dark:   #1A130B;
+
+      /* Glove-tanned leather palette (the 1984 Coach color card) */
+      --british-tan: #B26B36;   --tan: #B26B36;
+      --saddle:      #9A6230;
+      --tabac:       #99662F;
+      --camel:       #C28E51;
+      --putty:       #C3B190;
+      --mocha:       #4A3526;
+      --chocolate:   #3A2413;
+      --mahogany:    #5A2A22;
+      --oxblood:     #4C1D1E;
+      --burgundy:    #5E2122;
+      --coach-red:   #8C2C24;
+      --sage:        #5C5C44;
+      --navy:        #21304B;
+      --brass:       #9C7A38;
+      --brass-lt:    #C2A24E;
+
+      /* Brand accents */
+      --indigo:    #283B5A;
+      --hunter:    #3A4A30;
+
+      /* Ink scale — warm browns, never grey */
+      --ink:       #1F160C;
+      --ink-warm:  #3A2718;
+      --ink-mid:   #5F4630;
+      --ink-muted: #927C68;
+      --ink-light: #BCA686;
+      --ink-inv:   #F4EBD9;
+
+      /* Rules / keylines */
+      --rule:      #B9A079;
+      --rule-lt:   #D8C7A6;
+      --rule-dk:   #7E5E3E;
+      --keyline:   #2A1D10;
+
+      /* Product leather colorways */
+      --leather-british-tan:#B26B36; --leather-saddle:#9A6230; --leather-tabac:#99662F;
+      --leather-mahogany:#5A2A22; --leather-burgundy:#5E2122; --leather-mocha:#4A3526;
+      --leather-sage:#5C5C44; --leather-navy:#21304B; --leather-putty:#C3B190; --leather-black:#1A130B;
+
+      /* Type families */
+      --f-display: 'alga', 'Playfair Display', Georgia, serif;
+      --f-body:    'Playfair Display', Georgia, 'Times New Roman', serif;
+      --f-label:   'Barlow Condensed', 'Arial Narrow', sans-serif;
+      --f-stamp:   'Courier Prime', 'Courier New', monospace;
+
+      /* Layout */
+      --container: 1280px;
+      --gutter:    48px;
+      --seam:      2px;
+
+      /* Motion */
+      --ease-out:     cubic-bezier(0, 0, 0.2, 1);
+      --ease-leather: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --dur-fast:   0.22s;
+      --dur-reveal: 0.7s;
+      --transition-base: all 0.22s var(--ease-out);
+    }
+
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; overflow-x: clip; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--f-body);
+      font-weight: 500;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; background: none; border: none; font: inherit; color: inherit; }
+    ::selection { background: var(--british-tan); color: #fff; }
+
+    /* ════════════════════════════════════════════════════════
+       COMPONENT KIT
+       ════════════════════════════════════════════════════════ */
+
+    /* ── Eyebrow ── */
+    .eyebrow {
+      font-family: var(--f-label); font-weight: 500;
+      font-size: 12px; letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--british-tan);
+    }
+
+    /* ── Stamp (courier / receipt) ── */
+    .stamp {
+      font-family: var(--f-stamp); font-size: 11px;
+      letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-muted);
+    }
+
+    /* ── Buttons (zero radius, sharp) ── */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-height: 46px; padding: 0 30px;
+      font-family: var(--f-label); font-weight: 500;
+      font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase;
+      border: 1px solid transparent; transition: var(--transition-base);
+    }
+    .btn:active { transform: scale(0.97); }
+    .btn--tan { background: var(--british-tan); color: #fff; border-color: var(--british-tan); }
+    .btn--tan:hover { background: var(--saddle); border-color: var(--saddle); }
+    .btn--ghost { background: transparent; color: var(--ink); border-color: var(--keyline); }
+    .btn--ghost:hover { background: var(--ink); color: var(--ink-inv); }
+    .btn--ghost-inv { background: transparent; color: var(--ink-inv); border-color: rgba(244,235,217,0.4); }
+    .btn--ghost-inv:hover { background: var(--ink-inv); color: var(--ink); border-color: var(--ink-inv); }
+    .btn--sm { min-height: 40px; padding: 0 20px; font-size: 12px; }
+
+    /* ── Badge ── */
+    .badge {
+      display: inline-block; font-family: var(--f-label); font-weight: 500;
+      font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; padding: 5px 10px;
+    }
+    .badge--rts { background: var(--hunter); color: var(--ink-inv); }
+    .badge--cto { background: var(--ink); color: var(--ink-inv); }
+
+    /* ── Availability indicator (pulse dot) ── */
+    .avail {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-family: var(--f-label); font-size: 11px; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--hunter);
+    }
+    .avail__dot { width: 6px; height: 6px; border-radius: 50%; background: var(--hunter); flex-shrink: 0; animation: il-pulse 1.8s ease-in-out infinite; }
+    @keyframes il-pulse { 0%,100%{opacity:1} 50%{opacity:.2} }
+
+    /* ── Cartouche (double-ruled wordmark) ── */
+    .cartouche {
+      display: inline-flex; flex-direction: column; align-items: center; gap: 4px;
+      padding: 8px 18px; border: 1.5px solid var(--keyline);
+      outline: 1px solid var(--keyline); outline-offset: 3px; background: transparent;
+    }
+    .cartouche__name {
+      font-family: var(--f-display); font-weight: 400; font-size: 17px;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); line-height: 1;
+    }
+    .cartouche__sub {
+      font-family: var(--f-label); font-weight: 500; font-size: 8px;
+      letter-spacing: 0.42em; text-transform: uppercase; color: var(--ink-muted);
+      line-height: 1; padding-left: 0.42em;
+    }
+    .cartouche--inv .cartouche__name { color: var(--ink-inv); }
+    .cartouche--inv { border-color: var(--rule); outline-color: var(--rule); }
+    .cartouche--inv .cartouche__sub { color: var(--ink-light); }
+
+    /* ── Hangtag (CSS leather lozenge on brass ball-chain) ── */
+    .hangtag { display: inline-flex; flex-direction: column; align-items: center; }
+    .hangtag__chain {
+      width: 7px; height: 50px;
+      background: radial-gradient(circle at 50% 22%, var(--brass-lt) 0 1.6px, transparent 2px) 0 0 / 7px 7px repeat-y;
+      margin-bottom: -2px;
+    }
+    .hangtag__tag {
+      position: relative; width: 60px; height: 130px;
+      transform-origin: top center;
+      background: linear-gradient(150deg,
+        color-mix(in srgb, var(--british-tan) 86%, #fff 14%),
+        var(--british-tan) 55%,
+        color-mix(in srgb, var(--british-tan) 80%, #000 20%));
+      border-radius: 26px;
+      box-shadow: inset 0 2px 5px rgba(255,255,255,0.18), inset 0 -5px 10px rgba(0,0,0,0.32), 0 6px 14px rgba(30,18,8,0.3);
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px;
+      animation: il-sway 6s ease-in-out infinite;
+    }
+    @keyframes il-sway { 0%,100%{transform:rotate(4deg)} 50%{transform:rotate(7deg)} }
+    .hangtag__hole {
+      position: absolute; top: 17px; width: 12px; height: 12px; border-radius: 50%;
+      background: radial-gradient(circle at 40% 35%, #3a2a18, #110b05);
+      box-shadow: 0 0 0 2px var(--brass), inset 0 1px 2px rgba(0,0,0,0.6);
+    }
+    .hangtag__word {
+      font-family: var(--f-display); font-weight: 400; font-size: 13px;
+      letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.05;
+      color: color-mix(in srgb, var(--british-tan) 52%, #000 48%);
+      text-shadow: 0 1px 0 rgba(255,255,255,0.16);
+    }
+    .hangtag__word:first-of-type { margin-top: 26px; }
+    /* leather colorway variants */
+    .hangtag--mahogany .hangtag__tag { background: linear-gradient(150deg, color-mix(in srgb, var(--mahogany) 86%, #fff 14%), var(--mahogany) 55%, color-mix(in srgb, var(--mahogany) 80%, #000 20%)); }
+    .hangtag--mahogany .hangtag__word { color: color-mix(in srgb, var(--mahogany) 50%, #fff 50%); }
+    .hangtag--burgundy .hangtag__tag { background: linear-gradient(150deg, color-mix(in srgb, var(--burgundy) 86%, #fff 14%), var(--burgundy) 55%, color-mix(in srgb, var(--burgundy) 80%, #000 20%)); }
+    .hangtag--burgundy .hangtag__word { color: color-mix(in srgb, var(--burgundy) 50%, #fff 50%); }
+
+    /* ── Section primitives ── */
+    .keyline-b { border-bottom: 3px double var(--keyline); }
+    .keyline-t { border-top: 3px double var(--keyline); }
+    .wrap { max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter); }
+    .section-eyebrow { margin-bottom: 14px; }
+    .section-title {
+      font-family: var(--f-display); font-weight: 400;
+      font-size: clamp(1.8rem, 3vw, 2.6rem); line-height: 1.2; color: var(--ink-warm);
+    }
+    .section-title em { font-style: italic; color: var(--british-tan); }
+
+    /* ════════════════════════════════════════════════════════
+       ANNOUNCEMENT BAR
+       ════════════════════════════════════════════════════════ */
+    .ann {
+      background: var(--oxblood); text-align: center; padding: 10px 16px;
+    }
+    .ann__msg {
+      font-family: var(--f-display); font-size: 11px; letter-spacing: 0.26em;
+      text-transform: uppercase; color: #f1e3d6; transition: opacity 0.35s;
+      display: inline-block;
+    }
+
+    /* ════════════════════════════════════════════════════════
+       HEADER
+       ════════════════════════════════════════════════════════ */
+    .hdr {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(244,235,217,0.94);
+      backdrop-filter: saturate(140%) blur(8px);
+      border-bottom: 3px double var(--keyline);
+      transition: box-shadow 0.25s;
+    }
+    .hdr.scrolled { box-shadow: 0 6px 24px rgba(30,18,8,0.10); }
+    .hdr__inner {
+      max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter);
+      height: 84px; display: flex; align-items: center; justify-content: space-between; gap: 32px;
+    }
+    .hdr__nav { flex: 1; display: flex; gap: 30px; align-items: center; }
+    .hdr__nav--right { justify-content: flex-end; }
+    .hdr__link {
+      font-family: var(--f-display); font-size: 13px; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--ink-mid); transition: color 0.22s var(--ease-out);
+      white-space: nowrap;
+    }
+    .hdr__link:hover { color: var(--british-tan); }
+    .hdr__bag { color: var(--ink); }
+    .hdr__logo { flex-shrink: 0; }
+    @media (max-width: 880px) {
+      .hdr__nav { display: none; }
+      .hdr__nav--bag { display: flex; flex: 0; }
+      .hdr__inner { justify-content: space-between; }
+    }
+
+    /* ════════════════════════════════════════════════════════
+       HERO — AURAFORM full-bleed, Indigo Leather catalog cover
+       ════════════════════════════════════════════════════════ */
+    .hero {
+      position: relative; background: var(--bg-dark); color: var(--ink-inv);
+      min-height: 100vh; overflow: hidden; isolation: isolate;
+      border-bottom: 3px double var(--keyline);
+    }
+    .hero__glow {
+      position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 54% 46% at 50% 80%, rgba(140,44,36,0.34), transparent 60%),
+        radial-gradient(ellipse 90% 42% at 50% 0%, rgba(26,19,11,0.85), transparent 55%),
+        radial-gradient(ellipse 80% 50% at 50% 6%, rgba(178,107,54,0.08), transparent 60%);
+    }
+    .hero__inner {
+      position: relative; z-index: 3;
+      max-width: 820px; margin: 0 auto; padding: 7vh 24px 0; text-align: center;
+    }
+    .hero__eyebrow { color: var(--british-tan); }
+    .hero__h1 {
+      font-family: var(--f-display); font-weight: 300;
+      font-size: clamp(2.6rem, 5vw, 4.7rem); line-height: 1.0; letter-spacing: 0.01em;
+      margin: 16px 0 0; text-shadow: 0 2px 30px rgba(26,19,11,0.6);
+    }
+    .hero__h1 em { font-style: italic; color: var(--british-tan); }
+    .hero__sub {
+      font-family: var(--f-display); font-style: italic; font-weight: 400;
+      font-size: clamp(1rem, 1.5vw, 1.15rem); color: rgba(244,235,217,0.66);
+      line-height: 1.75; max-width: 40ch; margin: 20px auto 26px;
+      text-shadow: 0 1px 16px rgba(26,19,11,0.7);
+    }
+    .hero__ctas { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+    .hero__stage {
+      position: absolute; left: 50%; bottom: -52px; transform: translateX(-50%);
+      width: min(412px, 58vw); z-index: 2;
+    }
+    .hero__plate {
+      position: relative; background: var(--bg-cream); padding: 11px;
+      border: 1px solid var(--keyline);
+      box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(244,235,217,0.06);
+    }
+    .hero__plate-frame { position: relative; aspect-ratio: 1 / 1; overflow: hidden; }
+    .hero__plate-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center 60%; display: block; }
+    .hero__plate::after {
+      content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 90px;
+      background: linear-gradient(to bottom, transparent, var(--bg-dark) 98%);
+      pointer-events: none; z-index: 3;
+    }
+    .hero__plate-cap {
+      position: absolute; bottom: 20px; left: 0; right: 0; text-align: center; z-index: 4;
+      font-family: var(--f-stamp); font-size: 10px; letter-spacing: 0.24em;
+      text-transform: uppercase; color: rgba(244,235,217,0.7);
+    }
+    .hero__hangtag { position: absolute; top: -40px; right: -6px; z-index: 4; }
+
+    .hero__bar {
+      position: absolute; left: 0; right: 0; bottom: 0; z-index: 5;
+      display: flex; align-items: center; justify-content: center; gap: 28px;
+      padding: 16px 24px; flex-wrap: wrap;
+      background: linear-gradient(to top, var(--bg-dark) 55%, rgba(26,19,11,0.0));
+      border-top: 3px double var(--keyline);
+    }
+    .hero__bar .stamp { color: rgba(244,235,217,0.62); }
+    .hero__bar-sep { width: 5px; height: 5px; background: var(--british-tan); transform: rotate(45deg); }
+    @media (max-width: 720px) {
+      .hero { min-height: auto; padding-bottom: 0; }
+      .hero__stage { position: relative; left: auto; bottom: auto; transform: none; margin: 40px auto -3px; }
+      .hero__bar { position: static; }
+      .hero__hangtag { right: 8px; }
+    }
+
+    /* ════════════════════════════════════════════════════════
+       DIFFERENCE STRIP — 115 steps
+       ════════════════════════════════════════════════════════ */
+    .diff { background: var(--bg); padding: 64px 0; border-bottom: 1px solid var(--rule-lt); }
+    .diff__inner { display: grid; grid-template-columns: 1fr auto; gap: 56px; align-items: center; }
+    .diff__body {
+      font-family: var(--f-display); font-style: italic; font-weight: 400;
+      font-size: 1.1rem; color: var(--ink-mid); line-height: 1.8; max-width: 52ch; margin: 14px 0 0;
+    }
+    .diff__stats { display: flex; gap: 48px; }
+    .diff__stat { text-align: center; }
+    .diff__stat-n { font-family: var(--f-display); font-weight: 200; font-size: clamp(2.6rem, 5vw, 4rem); line-height: 1; color: var(--ink); }
+    .diff__stat-l { font-family: var(--f-label); font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--ink-muted); margin-top: 8px; }
+    @media (max-width: 760px) { .diff__inner { grid-template-columns: 1fr; gap: 36px; } .diff__stats { justify-content: space-between; gap: 16px; } }
+
+    /* ════════════════════════════════════════════════════════
+       TWO WAYS TO SHOP — seam grid
+       ════════════════════════════════════════════════════════ */
+    .ways { background: var(--bg-warm); padding: 72px 0; }
+    .ways__hdr { text-align: center; max-width: 640px; margin: 0 auto 40px; }
+    .ways__sub { font-family: var(--f-display); font-style: italic; color: var(--ink-mid); font-size: 1.05rem; line-height: 1.7; margin-top: 12px; }
+    .ways__grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--seam); background: var(--keyline); border: 1px solid var(--keyline); }
+    .way { background: var(--bg-cream); padding: 44px 40px; display: flex; flex-direction: column; align-items: flex-start; }
+    .way__title { font-family: var(--f-display); font-weight: 400; font-size: 1.5rem; color: var(--ink); margin: 18px 0 12px; }
+    .way__body { font-family: var(--f-body); font-weight: 500; color: var(--ink-mid); line-height: 1.7; font-size: 0.98rem; margin-bottom: 18px; }
+    .way__detail { font-family: var(--f-label); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-warm); margin-bottom: 24px; }
+    .way__detail strong { color: var(--ink); }
+    .way__spacer { flex: 1; }
+    @media (max-width: 760px) { .ways__grid { grid-template-columns: 1fr; } }
+
+    /* ════════════════════════════════════════════════════════
+       FEATURED — full-bleed split
+       ════════════════════════════════════════════════════════ */
+    .featured { display: grid; grid-template-columns: 56fr 44fr; border-bottom: 3px double var(--keyline); }
+    .featured__img { position: relative; background: var(--bg-warm); min-height: 560px; }
+    .featured__img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .featured__badge { position: absolute; top: 20px; left: 20px; z-index: 2; }
+    .featured__copy { background: var(--bg-dark); color: var(--ink-inv); padding: 72px 64px; display: flex; flex-direction: column; justify-content: center; }
+    .featured__name { font-family: var(--f-display); font-weight: 300; font-size: clamp(2.4rem, 4vw, 3.6rem); line-height: 1.05; margin: 18px 0 0; }
+    .featured__desc { font-family: var(--f-display); font-style: italic; color: rgba(244,235,217,0.66); line-height: 1.8; margin: 20px 0 24px; max-width: 38ch; }
+    .featured__price { font-family: var(--f-display); font-weight: 300; font-size: 2rem; color: var(--british-tan); margin-bottom: 14px; }
+    .featured__swatches { display: flex; gap: 10px; margin: 8px 0 28px; }
+    .swatch { width: 30px; height: 30px; border: 1px solid rgba(244,235,217,0.3); cursor: pointer; transition: var(--transition-base); }
+    .swatch.active { outline: 1px solid var(--british-tan); outline-offset: 3px; }
+    .featured__btns { display: flex; gap: 12px; flex-wrap: wrap; }
+    @media (max-width: 880px) { .featured { grid-template-columns: 1fr; } .featured__img { min-height: 420px; } .featured__copy { padding: 56px 32px; } }
+
+    /* ════════════════════════════════════════════════════════
+       COLLECTION BENTO — full-bleed seam grid (la Colombe flow)
+       ════════════════════════════════════════════════════════ */
+    .coll { background: var(--keyline); }
+    .coll__hdr { background: var(--bg); padding: 56px var(--gutter) 40px; display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+    .coll__grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 300px; gap: var(--seam); }
+    .coll-tile { position: relative; overflow: hidden; display: block; background: var(--bg-warm); }
+    .coll-tile--tall { grid-row: span 2; }
+    .coll-tile--wide { grid-column: span 2; }
+    .coll-tile img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s var(--ease-leather); }
+    .coll-tile:hover img { transform: scale(1.05); }
+    .coll-tile__scrim { position: absolute; inset: 0; background: linear-gradient(to top, rgba(26,19,11,0.78) 0%, rgba(26,19,11,0.12) 45%, transparent 70%); }
+    .coll-tile__label { position: absolute; left: 24px; bottom: 22px; right: 24px; z-index: 2; color: var(--ink-inv); }
+    .coll-tile__name { font-family: var(--f-display); font-weight: 400; font-size: 1.5rem; line-height: 1.1; }
+    .coll-tile__meta { font-family: var(--f-label); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(244,235,217,0.72); margin-top: 6px; }
+    .coll-tile__arrow { position: absolute; top: 20px; right: 20px; z-index: 2; color: var(--ink-inv); font-size: 20px; opacity: 0; transform: translate(-6px, 6px); transition: all 0.35s var(--ease-out); }
+    .coll-tile:hover .coll-tile__arrow { opacity: 1; transform: translate(0,0); }
+    @media (max-width: 880px) { .coll__grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 240px; } .coll-tile--wide { grid-column: span 2; } }
+
+    /* ════════════════════════════════════════════════════════
+       STORY — full-bleed split
+       ════════════════════════════════════════════════════════ */
+    .story { display: grid; grid-template-columns: 1fr 1fr; }
+    .story__img { position: relative; min-height: 540px; background: var(--bg-warm); }
+    .story__img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .story__copy { background: var(--indigo); color: var(--ink-inv); padding: 80px 64px; display: flex; flex-direction: column; justify-content: center; }
+    .story__title { font-family: var(--f-display); font-weight: 300; font-size: clamp(2rem, 3.5vw, 3rem); line-height: 1.1; margin: 16px 0 0; }
+    .story__title em { font-style: italic; color: var(--brass-lt); }
+    .story__body { font-family: var(--f-display); font-style: italic; color: rgba(244,235,217,0.72); line-height: 1.85; margin: 22px 0 28px; max-width: 46ch; }
+    .story__stats { display: flex; gap: 40px; margin-bottom: 30px; }
+    .story__stat-n { font-family: var(--f-display); font-weight: 200; font-size: 2.6rem; line-height: 1; }
+    .story__stat-l { font-family: var(--f-label); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(244,235,217,0.6); margin-top: 6px; }
+    @media (max-width: 880px) { .story { grid-template-columns: 1fr; } .story__img { min-height: 380px; } .story__copy { padding: 56px 32px; } }
+
+    /* ════════════════════════════════════════════════════════
+       TESTIMONIALS
+       ════════════════════════════════════════════════════════ */
+    .testis { background: var(--bg); padding: 80px 0; border-top: 1px solid var(--rule-lt); }
+    .testis__hdr { text-align: center; max-width: 720px; margin: 0 auto 44px; }
+    .testis__title { font-family: var(--f-display); font-weight: 300; font-style: italic; font-size: clamp(1.6rem, 3vw, 2.4rem); color: var(--ink-warm); margin-top: 12px; }
+    .testis__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--seam); background: var(--keyline); border: 1px solid var(--keyline); }
+    .testi { background: var(--bg-cream); padding: 36px 32px; }
+    .testi__tag { font-family: var(--f-stamp); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--british-tan); }
+    .testi__stars { color: var(--brass); letter-spacing: 2px; margin: 12px 0 14px; font-size: 13px; }
+    .testi__quote { font-family: var(--f-display); font-style: italic; font-size: 1.05rem; line-height: 1.7; color: var(--ink-warm); margin-bottom: 22px; }
+    .testi__author { display: flex; align-items: center; gap: 12px; }
+    .testi__avatar { width: 42px; height: 42px; overflow: hidden; border: 1px solid var(--rule); filter: sepia(0.25); }
+    .testi__avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .testi__name { font-family: var(--f-label); font-weight: 600; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); }
+    .testi__loc { font-family: var(--f-label); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-muted); }
+    @media (max-width: 880px) { .testis__grid { grid-template-columns: 1fr; } }
+
+    /* ════════════════════════════════════════════════════════
+       MATERIALS
+       ════════════════════════════════════════════════════════ */
+    .mats { background: var(--bg-warm); padding: 80px 0; }
+    .mats__inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .mats__title { font-family: var(--f-display); font-weight: 300; font-size: clamp(1.8rem, 3vw, 2.8rem); line-height: 1.1; color: var(--ink-warm); margin: 16px 0 18px; }
+    .mats__title em { font-style: italic; color: var(--british-tan); }
+    .mats__body { font-family: var(--f-display); font-style: italic; color: var(--ink-mid); line-height: 1.8; max-width: 44ch; margin-bottom: 28px; }
+    .mats__pts { display: flex; flex-direction: column; }
+    .mpt { display: flex; gap: 16px; padding: 20px 0; border-top: 1px solid var(--rule); }
+    .mpt:last-child { border-bottom: 1px solid var(--rule); }
+    .mpt__check { flex-shrink: 0; width: 22px; height: 22px; color: var(--british-tan); }
+    .mpt__title { font-family: var(--f-label); font-weight: 600; font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); }
+    .mpt__desc { font-family: var(--f-body); font-weight: 500; color: var(--ink-mid); font-size: 0.92rem; line-height: 1.6; margin-top: 4px; }
+    @media (max-width: 880px) { .mats__inner { grid-template-columns: 1fr; gap: 36px; } }
+
+    /* ════════════════════════════════════════════════════════
+       ATELIER LIST (oxblood)
+       ════════════════════════════════════════════════════════ */
+    .atelier { background: var(--oxblood); color: #f1e3d6; padding: 88px var(--gutter); text-align: center; border-top: 3px double var(--keyline); }
+    .atelier__title { font-family: var(--f-display); font-weight: 300; font-size: clamp(1.9rem, 3.5vw, 3rem); margin: 14px 0 10px; color: #f6ead9; line-height: 1.1; }
+    .atelier__sub { font-family: var(--f-display); font-style: italic; color: rgba(241,227,214,0.62); font-size: 1.05rem; margin-bottom: 30px; }
+    .atelier__form { display: flex; max-width: 460px; margin: 0 auto; }
+    .atelier__input { flex: 1; padding: 14px 18px; font-family: var(--f-label); font-size: 13px; letter-spacing: 0.1em; background: rgba(244,235,217,0.08); border: 1px solid rgba(244,235,217,0.4); border-right: none; color: #f1e3d6; outline: none; }
+    .atelier__input::placeholder { color: rgba(241,227,214,0.5); }
+    .atelier__fine { font-family: var(--f-stamp); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(241,227,214,0.4); margin-top: 18px; }
+
+    /* ════════════════════════════════════════════════════════
+       FOOTER
+       ════════════════════════════════════════════════════════ */
+    .footer { background: var(--bg-dark); color: var(--ink-inv); padding: 64px var(--gutter) 28px; }
+    .footer__top { max-width: var(--container); margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(244,235,217,0.12); }
+    .footer__tagline { font-family: var(--f-display); font-style: italic; color: rgba(244,235,217,0.5); line-height: 1.85; max-width: 32ch; margin: 18px 0 18px; font-size: 0.92rem; }
+    .footer__social { display: flex; gap: 18px; }
+    .footer__social a { font-family: var(--f-label); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(244,235,217,0.5); transition: color 0.2s; }
+    .footer__social a:hover { color: var(--british-tan); }
+    .footer__col-title { font-family: var(--f-label); font-weight: 600; font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--british-tan); margin-bottom: 16px; }
+    .footer__links { display: flex; flex-direction: column; gap: 11px; }
+    .footer__links a { font-family: var(--f-display); font-size: 0.95rem; color: rgba(244,235,217,0.72); transition: color 0.2s; }
+    .footer__links a:hover { color: var(--ink-inv); }
+    .footer__bottom { max-width: var(--container); margin: 24px auto 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; }
+    .footer__copy, .footer__badge { font-family: var(--f-label); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(244,235,217,0.42); }
+    .footer__badges { display: flex; gap: 22px; }
+    @media (max-width: 880px) { .footer__top { grid-template-columns: 1fr 1fr; } }
+
+    /* ── Scroll reveal ── */
+    [data-reveal] { opacity: 0; transform: translateY(22px); transition: opacity var(--dur-reveal) var(--ease-out), transform var(--dur-reveal) var(--ease-out); }
+    [data-reveal].visible { opacity: 1; transform: none; }
+    [data-d="1"] { transition-delay: 0.08s; } [data-d="2"] { transition-delay: 0.16s; } [data-d="3"] { transition-delay: 0.24s; }
+    @media (prefers-reduced-motion: reduce) { [data-reveal] { opacity: 1; transform: none; } .hangtag__tag { animation: none; transform: rotate(5deg); } }
+
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  </style>
+</head>
+<body>
+
+  <!-- ══ ANNOUNCEMENT ══ -->
+  <div class="ann" role="status" aria-live="polite">
+    <span class="ann__msg" id="ann-msg">[ Glove-Tanned Cowhide · Crafted to Order · Made in U.S.A. ]</span>
+  </div>
+
+  <!-- ══ HEADER ══ -->
+  <header class="hdr" id="hdr">
+    <div class="hdr__inner">
+      <nav class="hdr__nav" aria-label="Primary">
+        <a class="hdr__link" href="collection.html">Collection</a>
+        <a class="hdr__link" href="ready-to-ship.html">Ready to Ship</a>
+      </nav>
+      <a class="hdr__logo" href="index.html" aria-label="Indigo Leather — Home">
+        <span class="cartouche">
+          <span class="cartouche__name">Indigo Leather</span>
+          <span class="cartouche__sub">Leatherware</span>
+        </span>
+      </a>
+      <nav class="hdr__nav hdr__nav--right" aria-label="Secondary">
+        <a class="hdr__link" href="about.html">About</a>
+        <a class="hdr__link" href="journal.html">Journal</a>
+        <a class="hdr__link hdr__bag" href="cart.html">Bag (2)</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ══ HERO ══ -->
+  <section class="hero" aria-labelledby="hero-h1">
+    <div class="hero__glow" aria-hidden="true"></div>
+
+    <div class="hero__inner">
+      <p class="eyebrow hero__eyebrow">Designer-made · Est. 2014</p>
+      <h1 class="hero__h1" id="hero-h1">Designed.<br><em>Refined.</em><br>Beautiful.</h1>
+      <p class="hero__sub">European silhouettes in full-grain glove-tanned cowhide, made entirely by one maker in the USA.</p>
+      <div class="hero__ctas">
+        <a class="btn btn--tan" href="collection.html">Shop the Collection</a>
+        <a class="btn btn--ghost-inv" href="about.html">The Process</a>
+      </div>
+    </div>
+
+    <div class="hero__stage">
+      <div class="hangtag hero__hangtag" aria-hidden="true">
+        <span class="hangtag__chain"></span>
+        <span class="hangtag__tag">
+          <span class="hangtag__hole"></span>
+          <span class="hangtag__word">Indigo</span>
+          <span class="hangtag__word">Leather</span>
+        </span>
+      </div>
+      <figure class="hero__plate">
+        <div class="hero__plate-frame">
+          <img src="../outputs/studio/IL_STUDIO_01_hero-three-quarter_20260614_v2.png" alt="The Juniper top-handle bag in Coach red, three-quarter view" />
+        </div>
+        <figcaption class="hero__plate-cap">The Juniper · British Tan No. 1984</figcaption>
+      </figure>
+    </div>
+
+    <div class="hero__bar" aria-hidden="true">
+      <span class="stamp">Glove-Tanned Cowhide</span>
+      <span class="hero__bar-sep"></span>
+      <span class="stamp">Crafted to Order</span>
+      <span class="hero__bar-sep"></span>
+      <span class="stamp">Made in U.S.A.</span>
+    </div>
+  </section>
+
+  <!-- ══ DIFFERENCE ══ -->
+  <section class="diff" aria-labelledby="diff-h">
+    <div class="wrap diff__inner">
+      <div data-reveal>
+        <p class="eyebrow">The Difference</p>
+        <h2 class="section-title" id="diff-h" style="margin-top:12px;">115 steps. Every bag.</h2>
+        <p class="diff__body">There are no less than 115 steps to making each bag. I do them all myself. The decisions embedded in the process are not afterthoughts — they are the design.</p>
+      </div>
+      <div class="diff__stats" data-reveal data-d="2">
+        <div class="diff__stat"><div class="diff__stat-n">115</div><div class="diff__stat-l">Steps per bag</div></div>
+        <div class="diff__stat"><div class="diff__stat-n">1</div><div class="diff__stat-l">Maker</div></div>
+        <div class="diff__stat"><div class="diff__stat-n">0</div><div class="diff__stat-l">Subcontractors</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ TWO WAYS TO SHOP ══ -->
+  <section class="ways" aria-labelledby="ways-h">
+    <div class="wrap">
+      <div class="ways__hdr" data-reveal>
+        <p class="eyebrow">How It Works</p>
+        <h2 class="section-title" id="ways-h" style="margin-top:12px;">Two ways to shop</h2>
+        <p class="ways__sub">Every piece in the collection is available to order. A small selection is always ready to ship.</p>
+      </div>
+      <div class="ways__grid" data-reveal data-d="2">
+        <div class="way">
+          <span class="badge badge--cto">Crafted to Order</span>
+          <div class="way__title">Made after purchase</div>
+          <p class="way__body">Choose your hide, hardware, and strap from a curated set of Indigo-approved options. Your piece is cut, assembled, and hand-stitched after your order is placed — a collection piece made specifically for you.</p>
+          <div class="way__spacer"></div>
+          <div class="way__detail">Lead time <strong>4–5 weeks</strong></div>
+          <a class="btn btn--tan" href="collection.html">Shop the Collection</a>
+        </div>
+        <div class="way">
+          <span class="badge badge--rts">Ready to Ship</span>
+          <div class="way__title">Available now</div>
+          <p class="way__body">A small, rotating selection of finished pieces in specific colorways — available for immediate purchase. When they're gone, they're gone. Check back often.</p>
+          <div class="way__spacer"></div>
+          <div class="way__detail avail"><span class="avail__dot"></span> Ships in 2–3 business days</div>
+          <a class="btn btn--ghost" href="ready-to-ship.html">View Ready to Ship</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FEATURED ══ -->
+  <section class="featured" aria-labelledby="feat-h">
+    <div class="featured__img">
+      <span class="featured__badge badge badge--cto">Crafted to Order</span>
+      <img src="../outputs/studio/IL_STUDIO_01_hero-three-quarter_INDIGO_20260614_v3.png" alt="The Juniper in Navy — three-quarter studio view" loading="lazy" />
+    </div>
+    <div class="featured__copy" data-reveal>
+      <p class="eyebrow">The Signature Bag</p>
+      <h2 class="featured__name" id="feat-h">The Juniper</h2>
+      <p class="featured__desc">A structured top-handle silhouette with a clean magnetic flap. The bag that started the collection.</p>
+      <div class="featured__price">$280</div>
+      <p class="stamp" id="swatch-label" style="color:rgba(244,235,217,0.6);">Leather — Mahogany</p>
+      <div class="featured__swatches" role="radiogroup" aria-labelledby="swatch-label">
+        <button class="swatch active" style="background:var(--leather-mahogany);" title="Mahogany" aria-label="Mahogany"></button>
+        <button class="swatch" style="background:var(--leather-british-tan);" title="British Tan" aria-label="British Tan"></button>
+        <button class="swatch" style="background:var(--leather-burgundy);" title="Burgundy" aria-label="Burgundy"></button>
+        <button class="swatch" style="background:var(--leather-black);" title="Black" aria-label="Black"></button>
+      </div>
+      <div class="featured__btns">
+        <a class="btn btn--tan" href="juniper.html">Add to Bag</a>
+        <a class="btn btn--ghost-inv" href="juniper.html">View Details</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ COLLECTION BENTO ══ -->
+  <section class="coll" aria-labelledby="coll-h">
+    <div class="coll__hdr" data-reveal>
+      <div>
+        <p class="eyebrow">From the Collection</p>
+        <h2 class="section-title" id="coll-h" style="margin-top:10px;">Made in small batches</h2>
+      </div>
+      <a class="btn btn--ghost btn--sm" href="collection.html">View All</a>
+    </div>
+    <div class="coll__grid">
+      <a class="coll-tile coll-tile--tall" href="collection.html">
+        <img src="../outputs/lifestyle/IL_LIFESTYLE_01_morning-desk_20260614.png" alt="Bags collection" loading="lazy" />
+        <div class="coll-tile__scrim"></div>
+        <div class="coll-tile__arrow">&#8599;</div>
+        <div class="coll-tile__label"><div class="coll-tile__name">Bags</div><div class="coll-tile__meta">Juniper · Junie · Keepsake Tote</div></div>
+      </a>
+      <a class="coll-tile" href="letter-wristlet.html">
+        <img src="../outputs/studio/IL_STUDIO_03_flatlay-overhead_20260614.png" alt="Wristlets collection" loading="lazy" />
+        <div class="coll-tile__scrim"></div>
+        <div class="coll-tile__arrow">&#8599;</div>
+        <div class="coll-tile__label"><div class="coll-tile__name">Wristlets</div><div class="coll-tile__meta">Letter Wristlet</div></div>
+      </a>
+      <a class="coll-tile" href="ready-to-ship.html">
+        <img src="../outputs/studio/IL_STUDIO_02_profile-side_20260614.png" alt="Ready to Ship" loading="lazy" />
+        <div class="coll-tile__scrim"></div>
+        <div class="coll-tile__arrow">&#8599;</div>
+        <div class="coll-tile__label"><div class="coll-tile__name">Ready to Ship</div><div class="coll-tile__meta">Limited · Ships now</div></div>
+      </a>
+      <a class="coll-tile coll-tile--wide" href="commissions.html">
+        <img src="../outputs/lifestyle/IL_LIFESTYLE_03_bookshop_20260614.png" alt="Commissions" loading="lazy" />
+        <div class="coll-tile__scrim"></div>
+        <div class="coll-tile__arrow">&#8599;</div>
+        <div class="coll-tile__label"><div class="coll-tile__name">Commissions</div><div class="coll-tile__meta">One-of-a-kind · By inquiry</div></div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ══ STORY ══ -->
+  <section class="story" aria-labelledby="story-h">
+    <div class="story__img">
+      <img src="../outputs/lifestyle/IL_LIFESTYLE_02_urban-street_20260614.png" alt="The maker's hands and a finished bag" loading="lazy" />
+    </div>
+    <div class="story__copy" data-reveal>
+      <p class="eyebrow" style="color:var(--brass-lt);">The Process</p>
+      <h2 class="story__title" id="story-h">115 steps.<br><em>Every bag.</em></h2>
+      <p class="story__body">Marking the pattern, cutting, skiving, gluing, burnishing, setting hardware, sewing, tamping — through every subassembly and into the final bag. Each piece is made entirely by hand, by the designer. No factory. No shortcuts.</p>
+      <div class="story__stats">
+        <div><div class="story__stat-n">115</div><div class="story__stat-l">Steps per bag</div></div>
+        <div><div class="story__stat-n">1</div><div class="story__stat-l">Maker</div></div>
+        <div><div class="story__stat-n">0</div><div class="story__stat-l">Subcontractors</div></div>
+      </div>
+      <a class="btn btn--ghost-inv" href="about.html" style="align-self:flex-start;">About the Studio</a>
+    </div>
+  </section>
+
+  <!-- ══ TESTIMONIALS ══ -->
+  <section class="testis" aria-labelledby="testis-h">
+    <div class="wrap">
+      <div class="testis__hdr" data-reveal>
+        <p class="eyebrow">What People Say</p>
+        <h2 class="testis__title" id="testis-h">"Someone with taste designed this."</h2>
+      </div>
+      <div class="testis__grid" data-reveal data-d="2">
+        <blockquote class="testi">
+          <span class="testi__tag">Juniper · Mahogany</span>
+          <div class="testi__stars" aria-label="5 out of 5">★★★★★</div>
+          <p class="testi__quote">"I have never seen anything like it. The shape, the proportions — it doesn't look handmade. It looks like something from a boutique. I get stopped constantly."</p>
+          <footer class="testi__author">
+            <div class="testi__avatar"><img src="https://picsum.photos/seed/carolyn-m-indigo/80/80" alt="Carolyn M." loading="lazy" /></div>
+            <div><div class="testi__name">Carolyn M.</div><div class="testi__loc">Portland, OR</div></div>
+          </footer>
+        </blockquote>
+        <blockquote class="testi">
+          <span class="testi__tag">Juniper · Navy</span>
+          <div class="testi__stars" aria-label="5 out of 5">★★★★★</div>
+          <p class="testi__quote">"Worth every penny. I have owned a lot of bags. None of them feel like this one. The leather, the hardware, the way the flap sits — it's beautiful."</p>
+          <footer class="testi__author">
+            <div class="testi__avatar"><img src="https://picsum.photos/seed/sarah-k-indigo/80/80" alt="Sarah K." loading="lazy" /></div>
+            <div><div class="testi__name">Sarah K.</div><div class="testi__loc">Nashville, TN</div></div>
+          </footer>
+        </blockquote>
+        <blockquote class="testi">
+          <span class="testi__tag">Letter Wristlet · Black</span>
+          <div class="testi__stars" aria-label="5 out of 5">★★★★★</div>
+          <p class="testi__quote">"Someone with real taste designed this. It's not just handmade — it's designed. That's the word. I bought two, and I'm already eyeing the Juniper."</p>
+          <footer class="testi__author">
+            <div class="testi__avatar"><img src="https://picsum.photos/seed/diane-h-indigo/80/80" alt="Diane H." loading="lazy" /></div>
+            <div><div class="testi__name">Diane H.</div><div class="testi__loc">Austin, TX</div></div>
+          </footer>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ MATERIALS ══ -->
+  <section class="mats" aria-labelledby="mats-h">
+    <div class="wrap mats__inner">
+      <div data-reveal>
+        <p class="eyebrow">Quality, Made Clear</p>
+        <h2 class="mats__title" id="mats-h">Glove-tanned hide.<br><em>Parachute thread.</em></h2>
+        <p class="mats__body">Every bag is built from full-grain glove-tanned cowhide, pigskin lining, and bonded nylon thread rated for parachute production. Materials chosen for the kind of use a bag actually gets.</p>
+        <a class="btn btn--tan" href="about.html">About the Materials</a>
+      </div>
+      <div class="mats__pts" data-reveal data-d="2">
+        <div class="mpt">
+          <svg class="mpt__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          <div><div class="mpt__title">Full-grain glove-tanned cowhide</div><div class="mpt__desc">Sourced for texture, hand, and durability. Chosen hide by hide.</div></div>
+        </div>
+        <div class="mpt">
+          <svg class="mpt__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          <div><div class="mpt__title">Parachute-grade thread</div><div class="mpt__desc">Bonded nylon used in parachute production. Not decorative stitching.</div></div>
+        </div>
+        <div class="mpt">
+          <svg class="mpt__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          <div><div class="mpt__title">Pigskin lining</div><div class="mpt__desc">Soft, durable, breathable. Holds its structure over years of use.</div></div>
+        </div>
+        <div class="mpt">
+          <svg class="mpt__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          <div><div class="mpt__title">Leather interfacing</div><div class="mpt__desc">Structure built from leather, not plastic boning. No shortcuts inside.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ ATELIER LIST ══ -->
+  <section class="atelier" aria-labelledby="atelier-h">
+    <p class="stamp" style="color:rgba(241,227,214,0.7);">The Atelier List</p>
+    <h2 class="atelier__title" id="atelier-h">First look at every batch</h2>
+    <p class="atelier__sub">[ New colorways and Ready-to-Ship pieces, sent the morning they open ]</p>
+    <form class="atelier__form" onsubmit="return false;">
+      <label for="atelier-email" class="sr-only">Email address</label>
+      <input id="atelier-email" class="atelier__input" type="email" placeholder="Your email address" autocomplete="email" />
+      <button class="btn btn--tan" type="submit" id="atelier-submit">Subscribe</button>
+    </form>
+    <p class="atelier__fine">Unsubscribe anytime · Never shared</p>
+  </section>
+
+  <!-- ══ FOOTER ══ -->
+  <footer class="footer">
+    <div class="footer__top">
+      <div>
+        <span class="cartouche cartouche--inv">
+          <span class="cartouche__name">Indigo Leather</span>
+          <span class="cartouche__sub">Leatherware</span>
+        </span>
+        <p class="footer__tagline">Designer-made leather handbags in small batches. Crafted to Order from the collection. Ready to Ship when available.</p>
+        <div class="footer__social"><a href="#">Instagram</a><a href="#">Pinterest</a><a href="#">Facebook</a></div>
+      </div>
+      <nav aria-label="Shop">
+        <div class="footer__col-title">Shop</div>
+        <div class="footer__links">
+          <a href="collection.html">The Collection</a>
+          <a href="juniper.html">Juniper</a>
+          <a href="junie.html">Junie</a>
+          <a href="letter-wristlet.html">Letter Wristlet</a>
+          <a href="ready-to-ship.html">Ready to Ship</a>
+        </div>
+      </nav>
+      <nav aria-label="Studio">
+        <div class="footer__col-title">Studio</div>
+        <div class="footer__links">
+          <a href="about.html">About the Designer</a>
+          <a href="journal.html">Journal</a>
+          <a href="events.html">Events &amp; Markets</a>
+          <a href="commissions.html">Commissions</a>
+        </div>
+      </nav>
+      <nav aria-label="Support">
+        <div class="footer__col-title">Support</div>
+        <div class="footer__links">
+          <a href="#">Crafted-to-Order FAQ</a>
+          <a href="#">Shipping &amp; Returns</a>
+          <a href="#">Leather Care</a>
+          <a href="#">Contact</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer__bottom">
+      <p class="footer__copy">© 2026 Indigo Leather · All rights reserved</p>
+      <div class="footer__badges">
+        <span class="footer__badge">Made in U.S.A.</span>
+        <span class="footer__badge">Lifetime Guarantee</span>
+        <span class="footer__badge">Secure Checkout</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* Announcement rotation */
+    const msgs = [
+      '[ Glove-Tanned Cowhide · Crafted to Order · Made in U.S.A. ]',
+      '[ Ready-to-Ship Junipers in Navy and Burgundy — limited pieces ]',
+      '[ Each bag made by hand after your order · 4–5 week lead time ]'
+    ];
+    let idx = 0; const annEl = document.getElementById('ann-msg');
+    setInterval(() => {
+      annEl.style.opacity = '0';
+      setTimeout(() => { idx = (idx + 1) % msgs.length; annEl.textContent = msgs[idx]; annEl.style.opacity = '1'; }, 350);
+    }, 4200);
+
+    /* Sticky header shadow */
+    const hdr = document.getElementById('hdr');
+    addEventListener('scroll', () => hdr.classList.toggle('scrolled', scrollY > 10), { passive: true });
+
+    /* Scroll reveal */
+    const obs = new IntersectionObserver((es) => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } }), { threshold: 0.12 });
+    document.querySelectorAll('[data-reveal]').forEach(el => obs.observe(el));
+
+    /* Featured swatch selector */
+    document.querySelectorAll('.swatch').forEach(sw => sw.addEventListener('click', function () {
+      document.querySelectorAll('.swatch').forEach(s => s.classList.remove('active'));
+      this.classList.add('active');
+      document.getElementById('swatch-label').textContent = 'Leather — ' + this.title;
+    }));
+
+    /* Atelier form */
+    document.getElementById('atelier-submit').addEventListener('click', function () {
+      const i = document.getElementById('atelier-email');
+      if (i.value && i.checkValidity()) { i.value = ''; i.placeholder = 'Welcome to the list ✓'; this.textContent = '✓'; }
+    });
+  </script>
+</body>
+</html>
